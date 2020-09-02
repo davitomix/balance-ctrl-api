@@ -1,24 +1,65 @@
-# README
+# Balance Ctrl API.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> This API was created to allow users to manage their finances.
 
-Things you may want to cover:
+<p align="center">
+  <img src="#">
+</p>
 
-* Ruby version
+## Built With
 
-* System dependencies
+- Rails
+- TDD
+- Rspec
+- JWT authentication.
 
-* Configuration
+## Live Demo
 
-* Database creation
+- [Heroku :rocket:](#)
 
-* Database initialization
+## Usage
 
-* How to run the test suite
+> Clone the repository to your local machine
 
-* Services (job queues, cache servers, search engines, etc.)
+```sh
+$ git clone https://github.com/davitomix/balance-ctrl-api/
+```
 
-* Deployment instructions
+> cd into the directory, install dependencies, build and start
 
-* ...
+```sh
+$ cd balance-ctrl-api
+$ bundle
+$ rails s
+```
+
+> Open `http://localhost:3000` using your favorite broswer, if it doesn't open automatically.
+
+## Automated Tests :space_invader:
+
+```sh
+$ cd balance-ctrl-api
+$ bundle exec rspec
+```
+
+## Authors
+
+👤 **David Elí**
+
+- Github: [@davitomix](https://github.com/davitomix)
+- Twitter: [@davitomix007](https://twitter.com/davitomix007)
+- Linkedin: [David Garcia](https://www.linkedin.com/in/davideligarcia/)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## 📝 License
+
+This project is [MIT](lic.url) licensed.

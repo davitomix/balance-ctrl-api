@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2020_09_01_220840) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "balances", force: :cascade do |t|
     t.bigint "user_id"
     t.string "title"
@@ -24,10 +27,11 @@ ActiveRecord::Schema.define(version: 2020_09_01_220840) do
   create_table "operations", force: :cascade do |t|
     t.string "title"
     t.integer "status"
-    t.integer "balance_id"
+    t.bigint "balance_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["balance_id"], name: "index_operations_on_balance_id"
   end
 
+  add_foreign_key "operations", "balances"
 end

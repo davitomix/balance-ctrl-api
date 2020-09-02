@@ -1,15 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe 'Operations API' do
+  let(:user) { create(:user) }
   # Initialize the test data
-  let!(:balance) { create(:balance) }
+  let!(:balance) { create(:balance, user_id: user.id) }
   let!(:operations) { create_list(:operation, 20, balance_id: balance.id, status: 1) }
   let(:balance_id) { balance.id }
   let(:id) { operations.first.id }
+  let(:headers) { valid_headers }
 
   # Test suite for GET /balances/:balance_id/operations
   describe 'GET /balances/:balance_id/operations' do
-    before { get "/balances/#{balance_id}/operations" }
+    before { get "/balances/#{balance_id}/operations", params: {}, headers: headers }
 
     context 'when balance exists' do
       it 'returns status code 200' do
@@ -36,7 +38,7 @@ RSpec.describe 'Operations API' do
 
   # Test suite for GET /balances/:balance_id/operations/:id
   describe 'GET /balances/:balance_id/operations/:id' do
-    before { get "/balances/#{balance_id}/operations/#{id}" }
+    before { get "/balances/#{balance_id}/operations/#{id}", params: {}, headers: headers }
 
     context 'when balance operation exists' do
       it 'returns status code 200' do
@@ -63,10 +65,12 @@ RSpec.describe 'Operations API' do
 
   # Test suite for PUT /balances/:balance_id/operations
   describe 'POST /balances/:balance_id/operations' do
-    let(:valid_attributes) { { title: 'Visit Narnia', status: 2, balance_id: nil } }
+    let(:valid_attributes) { { title: 'Visit Narnia', status: 2 }.to_json }
 
     context 'when request attributes are valid' do
-      before { post "/balances/#{balance_id}/operations", params: valid_attributes }
+      before do
+        post "/balances/#{balance_id}/operations", params: valid_attributes, headers: headers
+      end
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
@@ -74,7 +78,7 @@ RSpec.describe 'Operations API' do
     end
 
     context 'when an invalid request' do
-      before { post "/balances/#{balance_id}/operations", params: {} }
+      before { post "/balances/#{balance_id}/operations", params: {}, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -88,9 +92,11 @@ RSpec.describe 'Operations API' do
 
   # Test suite for PUT /balances/:balance_id/operations/:id
   describe 'PUT /balances/:balance_id/operations/:id' do
-    let(:valid_attributes) { { title: 'Mozart' } }
+    let(:valid_attributes) { { title: 'Mozart' }.to_json }
 
-    before { put "/balances/#{balance_id}/operations/#{id}", params: valid_attributes }
+    before do
+      put "/balances/#{balance_id}/operations/#{id}", params: valid_attributes, headers: headers
+    end
 
     context 'when operation exists' do
       it 'returns status code 204' do
@@ -118,7 +124,7 @@ RSpec.describe 'Operations API' do
 
   # Test suite for DELETE /balances/:id
   describe 'DELETE /balances/:id' do
-    before { delete "/balances/#{balance_id}/operations/#{id}" }
+    before { delete "/balances/#{balance_id}/operations/#{id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

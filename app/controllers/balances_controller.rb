@@ -3,13 +3,13 @@ class BalancesController < ApplicationController
 
   # GET /todos
   def index
-    @balances = Balance.all
+    @balances = current_user.balances
     json_response(@balances)
   end
 
   # POST /todos
   def create
-    @balance = Balance.create!(balance_params)
+    @balance = current_user.balances.create!(balance_params)
     json_response(@balance, :created)
   end
 
@@ -34,7 +34,7 @@ class BalancesController < ApplicationController
 
   def balance_params
     # whitelist params
-    params.permit(:user_id, :title, :total, :category)
+    params.permit(:title, :total, :category)
   end
 
   def set_balance

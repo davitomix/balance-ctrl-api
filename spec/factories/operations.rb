@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :operation do
     title { Faker::Name.name }
-    type { false }
+    status { 1 }
     balance_id { nil }
   end
 end

@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2020_09_01_220840) do
 
   create_table "operations", force: :cascade do |t|
     t.string "title"
-    t.boolean "type"
+    t.integer "status"
     t.integer "balance_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

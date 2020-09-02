@@ -1,4 +1,4 @@
-10.times do |n|
+5.times do |n|
   user_id = Faker::Number.number(digits: 10)
   title  = Faker::Lorem.word
   total = Faker::Number.number(digits: 10)
@@ -11,7 +11,7 @@ end
 
 balances = Balance.all
 
-5.times do |n|
+2.times do |n|
   balances.each do |balance|
     title  = Faker::Name.name
     status = 1

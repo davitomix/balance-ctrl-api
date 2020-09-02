@@ -14,8 +14,8 @@ class OperationsController < ApplicationController
 
   # POST /todos/:todo_id/operations
   def create
-    @balance.operations.create!(operation_params)
-    json_response(@balance, :created)
+    @operation = @balance.operations.create!(operation_params)
+    json_response(@operation, :created)
   end
 
   # PUT /todos/:todo_id/operations/:id

@@ -65,47 +65,51 @@ RSpec.describe 'Operations API requested by USER' do
 
   # Test suite for PUT /balances/:balance_id/operations
   describe 'POST /balances/:balance_id/operations' do
-    let(:valid_attributes) { { title: 'Visit Narnia', status: 2 }.to_json }
 
     context 'when request attributes are valid' do
       before do
-        post "/users/#{user.id}/balances/#{balance_id}/operations", params: valid_attributes, headers: headers
+        post "/users/#{user.id}/balances/#{balance_id}/operations", params: {}, headers: headers
       end
 
-      it 'returns status code 201' do
-        expect(response).to have_http_status(201)
+      it 'returns status code 401' do
+        expect(response).to have_http_status(401)
+      end
+
+      it 'returns an authorization failure message' do
+        expect(response.body)
+          .to match(/Unauthorized request/)
       end
     end
 
     context 'when an invalid request' do
       before { post "/users/#{user.id}/balances/#{balance_id}/operations", params: {}, headers: headers }
 
-      it 'returns status code 422' do
-        expect(response).to have_http_status(422)
+      it 'returns status code 401' do
+        expect(response).to have_http_status(401)
       end
 
-      it 'returns a failure message' do
-        expect(response.body).to match(/Validation failed: Title can't be blank, Status can't be blank/)
+      it 'returns an authorization failure message' do
+        expect(response.body)
+          .to match(/Unauthorized request/)
       end
     end
   end
 
   # Test suite for PUT /balances/:balance_id/operations/:id
   describe 'PUT /balances/:balance_id/operations/:id' do
-    let(:valid_attributes) { { title: 'Mozart' }.to_json }
 
     before do
-      put "/users/#{user.id}/balances/#{balance_id}/operations/#{id}", params: valid_attributes, headers: headers
+      put "/users/#{user.id}/balances/#{balance_id}/operations/#{id}", params: {}, headers: headers
     end
 
     context 'when operation exists' do
-      it 'returns status code 204' do
-        expect(response).to have_http_status(204)
+      it 'returns status code 401' do
+        expect(response).to have_http_status(401)
       end
 
-      it 'updates the operation' do
-        updated_item = Operation.find(id)
-        expect(updated_item.title).to match(/Mozart/)
+      it 'returns an authorization failure message' do
+        expect(response.body)
+          .to match(/Unauthorized request/)
       end
     end
 
@@ -126,8 +130,13 @@ RSpec.describe 'Operations API requested by USER' do
   describe 'DELETE /balances/:id' do
     before { delete "/users/#{user.id}/balances/#{balance_id}/operations/#{id}", params: {}, headers: headers }
 
-    it 'returns status code 204' do
-      expect(response).to have_http_status(204)
+    it 'returns status code 401' do
+      expect(response).to have_http_status(401)
+    end
+
+    it 'returns an authorization failure message' do
+      expect(response.body)
+        .to match(/Unauthorized request/)
     end
   end
 end

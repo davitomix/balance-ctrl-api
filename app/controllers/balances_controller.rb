@@ -44,6 +44,6 @@ class BalancesController < ApplicationController
 
   # Confirms an admin user.
   def admin_user
-    json_response({error: 'Not Authorized'}, :unauthorized) unless current_user.admin?
+    json_response({status: 'Unauthorized'}, :unauthorized) unless current_user.admin?
   end
 end

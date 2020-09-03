@@ -1,8 +1,8 @@
 class BalancesController < ApplicationController
   skip_before_action :authorize_request, only: %i[index show]
-  before_action :admin_user, only: %i[create update destroy]
   before_action :set_user
   before_action :set_user_balance, only: %i[show update destroy]
+  before_action :admin_user, only: %i[create update destroy]
   # GET users/user_id/balance
   def index
     json_response(@user.balances)

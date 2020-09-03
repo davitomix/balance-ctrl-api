@@ -1,9 +1,10 @@
 class BalancesController < ApplicationController
+  skip_before_action :authorize_request, only: [:index, :show]
   before_action :admin_user, only: [:create, :update, :destroy]
   before_action :set_balance, only: [:show, :update, :destroy]
   # GET /todos
   def index
-    @balances = current_user.balances
+    @balances = Balance.all
     json_response(@balances)
   end
 

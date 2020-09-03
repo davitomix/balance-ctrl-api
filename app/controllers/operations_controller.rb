@@ -1,5 +1,5 @@
 class OperationsController < ApplicationController
-  skip_before_action :authorize_request
+  skip_before_action :authorize_request, except: %i[create update destroy]
   before_action :set_balance
   before_action :set_balance_operation, only: %i[show update destroy]
   before_action :current_user?, only: %i[create update destroy]
@@ -49,6 +49,6 @@ class OperationsController < ApplicationController
 
   def current_user?
     @user = User.find(@balance.user_id)
-    raise(ExceptionHandler::AuthenticationError, Message.unauthorized) unless @user == current_user
+    raise(ExceptionHandler::AuthenticationError, Message.unauthorized) unless @user === current_user
   end
 end

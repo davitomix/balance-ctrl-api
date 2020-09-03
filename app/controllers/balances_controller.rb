@@ -1,6 +1,6 @@
 class BalancesController < ApplicationController
+  before_action :admin_user, only: [:create, :update, :destroy]
   before_action :set_balance, only: [:show, :update, :destroy]
-
   # GET /todos
   def index
     @balances = current_user.balances
@@ -39,5 +39,10 @@ class BalancesController < ApplicationController
 
   def set_balance
     @balance = Balance.find(params[:id])
+  end
+
+  # Confirms an admin user.
+  def admin_user
+    json_response({error: 'Not Authorized'}, :unauthorized) unless current_user.admin?
   end
 end

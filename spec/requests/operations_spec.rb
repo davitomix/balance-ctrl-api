@@ -142,18 +142,21 @@ RSpec.describe 'Operations API requested by USER' do
 end
 
 RSpec.describe 'Operations API requested by ADMIN' do
-  let(:user) { create(:user, admin: true) }
+  let(:user) { create(:user, id: 1, admin: true) }
   # Initialize the test data
   let!(:balance) { create(:balance, user_id: user.id) }
   let!(:operations) { create_list(:operation, 20, balance_id: balance.id, status: 1) }
   let(:balance_id) { balance.id }
   let(:id) { operations.first.id }
   let(:headers) { valid_headers }
+  let(:subject) { OperationsController.new }
 
   # Test suite for GET /balances/:balance_id/operations
   describe 'GET /balances/:balance_id/operations' do
     before { get "/users/#{user.id}/balances/#{balance_id}/operations", params: {}, headers: headers }
 
+    it { subject.class.skip_before_action :current_user? }
+    
     context 'when balance exists' do
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
@@ -206,7 +209,7 @@ RSpec.describe 'Operations API requested by ADMIN' do
 
   # Test suite for PUT /balances/:balance_id/operations
   describe 'POST /balances/:balance_id/operations' do
-    let(:valid_attributes) { { title: 'Visit Narnia', status: 2 }.to_json }
+    let(:valid_attributes) { {title: 'Visit Narnia', status: 2 }.to_json }
 
     context 'when request attributes are valid' do
       before do

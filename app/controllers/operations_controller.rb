@@ -49,6 +49,6 @@ class OperationsController < ApplicationController
 
   def current_user?
     @user = User.find(@balance.user_id)
-    raise(ExceptionHandler::AuthenticationError, Message.unauthorized) unless @user === current_user
+    raise(ExceptionHandler::AuthenticationError, Message.unauthorized) unless @user == current_user
   end
 end

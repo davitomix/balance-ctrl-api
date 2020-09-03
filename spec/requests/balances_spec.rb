@@ -172,13 +172,13 @@ RSpec.describe 'Balances API requested by USER', type: :request do
       let(:invalid_attributes) { { title: nil, total: nil, category: nil }.to_json }
       before { post '/balances', params: invalid_attributes, headers: headers }
 
-      it 'returns status code 422' do
-        expect(response).to have_http_status(422)
+      it 'returns status code 401' do
+        expect(response).to have_http_status(401)
       end
 
-      it 'returns a validation failure message' do
+      it 'returns a authorization failure message' do
         expect(response.body)
-          .to match(/Validation failed: Title can't be blank, Total can't be blank, Category can't be blank/)
+          .to match(/Unauthorized request/)
       end
     end
   end
@@ -189,12 +189,12 @@ RSpec.describe 'Balances API requested by USER', type: :request do
     context 'when the record exists' do
       before { put "/balances/#{balance_id}", params: valid_attributes, headers: headers }
 
-      it 'updates the record' do
-        expect(response.body).to be_empty
+      it 'doesnt allow updates the record to user' do
+        expect(response.body).to match(/Unauthorized request/)
       end
 
-      it 'returns status code 204' do
-        expect(response).to have_http_status(204)
+      it 'returns status code 401' do
+        expect(response).to have_http_status(401)
       end
     end
   end
@@ -202,8 +202,12 @@ RSpec.describe 'Balances API requested by USER', type: :request do
   describe 'DELETE /balances/:id' do
     before { delete "/balances/#{balance_id}", params: {}, headers: headers }
 
-    it 'returns status code 204' do
-      expect(response).to have_http_status(204)
+    it 'returns status code 401' do
+      expect(response).to have_http_status(401)
+    end
+
+    it 'doesnt allow destroy the record to user' do
+      expect(response.body).to match(/Unauthorized request/)
     end
   end
 end

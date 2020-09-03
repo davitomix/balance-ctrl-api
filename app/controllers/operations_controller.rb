@@ -1,7 +1,7 @@
 class OperationsController < ApplicationController
   skip_before_action :authorize_request
   before_action :set_balance
-  before_action :set_balance_operation, only: [:show, :update, :destroy]
+  before_action :set_balance_operation, only: %i[show update destroy]
 
   # GET /balances/:balance_id/operations
   def index

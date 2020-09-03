@@ -7,7 +7,7 @@ RSpec.describe 'Balances API requested by ADMIN', type: :request do
   let(:headers) { valid_headers }
 
   describe 'GET /balances' do
-    before { get "/users/#{user.id}/balances", params: {}, headers: headers  }
+    before { get "/users/#{user.id}/balances", params: {}, headers: headers }
 
     it 'returns balances' do
       expect(json).not_to be_empty
@@ -20,7 +20,7 @@ RSpec.describe 'Balances API requested by ADMIN', type: :request do
   end
 
   describe 'GET /balances/:id' do
-    before { get "/users/#{user.id}/balances/#{balance_id}", params: {}, headers: headers  }
+    before { get "/users/#{user.id}/balances/#{balance_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'returns the balance' do
@@ -49,7 +49,7 @@ RSpec.describe 'Balances API requested by ADMIN', type: :request do
   describe 'POST /balances' do
     let(:valid_attributes) do
       # send json payload
-      { user_id: user.id.to_s, title: 'Learn Elm', total: 921978, category: 'x' }.to_json
+      { user_id: user.id.to_s, title: 'Learn Elm', total: 921_978, category: 'x' }.to_json
     end
 
     context 'when request is valid' do
@@ -80,7 +80,7 @@ RSpec.describe 'Balances API requested by ADMIN', type: :request do
   end
 
   describe 'PUT /balances/:id' do
-    let(:valid_attributes) { { title: 'Learn Python', total: 921978, category: 'x' }.to_json }
+    let(:valid_attributes) { { title: 'Learn Python', total: 921_978, category: 'x' }.to_json }
 
     context 'when the record exists' do
       before { put "/users/#{user.id}/balances/#{balance_id}", params: valid_attributes, headers: headers }
@@ -111,7 +111,7 @@ RSpec.describe 'Balances API requested by USER', type: :request do
   let(:headers) { valid_headers }
 
   describe 'GET /balances' do
-    before { get "/users/#{user.id}/balances", params: {}, headers: headers  }
+    before { get "/users/#{user.id}/balances", params: {}, headers: headers }
 
     it 'returns balances' do
       expect(json).not_to be_empty
@@ -124,7 +124,7 @@ RSpec.describe 'Balances API requested by USER', type: :request do
   end
 
   describe 'GET /balances/:id' do
-    before { get "/users/#{user.id}/balances/#{balance_id}", params: {}, headers: headers  }
+    before { get "/users/#{user.id}/balances/#{balance_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'returns the balance' do
@@ -153,7 +153,7 @@ RSpec.describe 'Balances API requested by USER', type: :request do
   describe 'POST /balances' do
     let(:valid_attributes) do
       # send json payload
-      { user_id: user.id.to_s, title: 'Learn Elm', total: 921978, category: 'x' }.to_json
+      { user_id: user.id.to_s, title: 'Learn Elm', total: 921_978, category: 'x' }.to_json
     end
 
     context 'when request is valid' do
@@ -184,7 +184,7 @@ RSpec.describe 'Balances API requested by USER', type: :request do
   end
 
   describe 'PUT /balances/:id' do
-    let(:valid_attributes) { { title: 'Learn Python', total: 921978, category: 'x' }.to_json }
+    let(:valid_attributes) { { title: 'Learn Python', total: 921_978, category: 'x' }.to_json }
 
     context 'when the record exists' do
       before { put "/users/#{user.id}/balances/#{balance_id}", params: valid_attributes, headers: headers }

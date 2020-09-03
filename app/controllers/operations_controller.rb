@@ -3,29 +3,29 @@ class OperationsController < ApplicationController
   before_action :set_balance
   before_action :set_balance_operation, only: [:show, :update, :destroy]
 
-  # GET /todos/:todo_id/operations
+  # GET /balances/:balance_id/operations
   def index
     json_response(@balance.operations)
   end
 
-  # GET /todos/:todo_id/operations/:id
+  # GET /balances/:balance_id/operations/:id
   def show
     json_response(@operation)
   end
 
-  # POST /todos/:todo_id/operations
+  # POST /balances/:balance_id/operations
   def create
     @operation = @balance.operations.create!(operation_params)
     json_response(@operation, :created)
   end
 
-  # PUT /todos/:todo_id/operations/:id
+  # PUT /balances/:balance_id/operations/:id
   def update
     @operation.update(operation_params)
     head :no_content
   end
 
-  # DELETE /todos/:todo_id/operations/:id
+  # DELETE /balances/:balance_id/operations/:id
   def destroy
     @operation.destroy
     head :no_content

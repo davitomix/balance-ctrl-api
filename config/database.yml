@@ -12,17 +12,17 @@ default: &default
 
 development:
   <<: *default
-  username: dev-postgre
-  password: password
-  database: balance-ctrl-api-dev
+  username: <%= ENV["DB_USER_NAME"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+  database: <%= ENV["DB_DEVELOPMENT"] %>
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  username: dev-postgre
-  password: password
-  database: balance-ctrl-api-test
+  username: <%= ENV["DB_USER_NAME"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+  database: <%= ENV["DB_TESTING"] %>
 
 production:
   <<: *default

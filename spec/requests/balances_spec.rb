@@ -159,12 +159,12 @@ RSpec.describe 'Balances API requested by USER', type: :request do
     context 'when request is valid' do
       before { post '/balances', params: valid_attributes, headers: headers }
 
-      it 'creates a balance' do
-        expect(json['title']).to eq('Learn Elm')
+      it 'unauthorized to creates a balance' do
+        expect(json['message']).to eq('Unauthorized request')
       end
 
-      it 'returns status code 201' do
-        expect(response).to have_http_status(201)
+      it 'returns status code 401' do
+        expect(response).to have_http_status(401)
       end
     end
 

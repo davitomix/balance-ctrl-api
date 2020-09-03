@@ -44,6 +44,6 @@ class BalancesController < ApplicationController
 
   # Confirms an admin user.
   def admin_user
-    raise(ExceptionHandler::AuthenticationError, Message.invalid_credentials) unless current_user.admin?
+    raise(ExceptionHandler::AuthenticationError, Message.unauthorized) unless current_user.admin?
   end
 end

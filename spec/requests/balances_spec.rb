@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Balances API', type: :request do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, admin: true) }
   let!(:balances) { create_list(:balance, 10, user_id: user.id) }
   let(:balance_id) { balances.first.id }
   let(:headers) { valid_headers }

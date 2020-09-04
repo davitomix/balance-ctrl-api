@@ -161,7 +161,7 @@ RSpec.describe 'Operations API requested by ADMIN' do
 
   # Test suite for PUT /users/:user_id/operations
   describe 'POST /users/:user_id/operations' do
-    let(:valid_attributes) { { title: 'Visit Narnia', status: 2, user_id: user.id, balance_id: 2}.to_json }
+    let(:valid_attributes) { { title: 'Visit Narnia', status: 2, user_id: user.id, balance_id: 2 }.to_json }
 
     context 'when request attributes are valid' do
       before do

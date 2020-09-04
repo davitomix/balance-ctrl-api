@@ -1,11 +1,12 @@
 class BalancesController < ApplicationController
   skip_before_action :authorize_request, only: %i[index show]
-  before_action :set_user
-  before_action :set_user_balance, only: %i[show update destroy]
   before_action :admin_user, only: %i[create update destroy]
+  before_action :set_user
+  before_action :set_balance, only: %i[update destroy]
+
   # GET users/user_id/balance
   def index
-    json_response(@user.balances)
+    json_response(User.first.balances)
   end
 
   # POST /users/balances
@@ -16,7 +17,7 @@ class BalancesController < ApplicationController
 
   # GET /users/balances/:id
   def show
-    json_response(@balance)
+    json_response(User.first.balances.find_by!(id: params[:id]))
   end
 
   # PUT /users/balances/:id
@@ -35,14 +36,14 @@ class BalancesController < ApplicationController
 
   def balance_params
     # whitelist params
-    params.permit(:title, :total, :category, :user_id)
+    params.permit(:title, :total, :category)
   end
 
   def set_user
-    @user = User.find(params[:user_id])
+    @user = User.find_by!(id: params[:user_id])
   end
 
-  def set_user_balance
+  def set_balance
     @balance = @user.balances.find_by!(id: params[:id]) if @user
   end
 

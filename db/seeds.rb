@@ -15,27 +15,25 @@ User.create(name:  name,
 end
 
 
-users = User.all
+categories = ['Account 1', 'Account 2', 'Account 3', 'Bonus', 'Extras', 'Day', 'Week']
 
-
-5.times do |n|
-  users.each do |user|
-  title  = Faker::Lorem.word
-  total = Faker::Number.number(digits: 10)
-  category = Faker::Lorem.word
-  user.balances.create(title: title,
-                       total: total,
-                       category: category)
-  end
+categories.length.times do |n|
+    title  = Faker::IndustrySegments.sector
+    total = Faker::Number.number(digits: 10)
+    category = categories[n]
+    User.first.balances.create(title: title,
+                          total: total,
+                          category: category)
 end
 
-balances = Balance.all
-
-2.times do |n|
-  balances.each do |balance|
-    title  = Faker::Name.name
+users = User.all
+users.each do |user|
+  rand(5...10).times do |n|
+    title  = Faker::IndustrySegments.sub_sector
     status = 1
-    balance.operations.create(title: title,
-                              status: status)
+    balance_id = rand(1...7)
+    user.operations.create!(title: title,
+                            status: status,
+                            balance_id: balance_id)
   end
 end

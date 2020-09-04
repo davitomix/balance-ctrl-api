@@ -1,13 +1,11 @@
 class OperationsController < ApplicationController
   skip_before_action :authorize_request, except: %i[create update destroy]
-  before_action :set_balance
-  before_action :set_balance_operation, only: %i[show update destroy]
-  before_action :current_user?, only: %i[create update destroy]
-  
+  before_action :set_user
+  before_action :set_operation, only: %i[show update destroy]
 
   # GET /balances/:balance_id/operations
   def index
-    json_response(@balance.operations)
+    json_response(@user.operations)
   end
 
   # GET /balances/:balance_id/operations/:id
@@ -17,7 +15,7 @@ class OperationsController < ApplicationController
 
   # POST /balances/:balance_id/operations
   def create
-    @operation = @balance.operations.create!(operation_params)
+    @operation = @user.operations.create!(operation_params)
     json_response(@operation, :created)
   end
 
@@ -39,16 +37,11 @@ class OperationsController < ApplicationController
     params.permit(:title, :status, :balance_id)
   end
 
-  def set_balance
-    @balance = Balance.find(params[:balance_id])
+  def set_user
+    @user = User.find_by!(id: params[:user_id])
   end
 
-  def set_balance_operation
-    @operation = @balance.operations.find_by!(id: params[:id]) if @balance
-  end
-
-  def current_user?
-    @user = User.find(@balance.user_id)
-    raise(ExceptionHandler::AuthenticationError, Message.unauthorized) unless @user === current_user
+  def set_operation
+    @operation = @user.operations.find_by!(id: params[:id]) if @user
   end
 end

@@ -1,0 +1,769 @@
+{
+	"info": {
+		"_postman_id": "a2b581c3-aa5a-4304-b9f6-39606d8514e8",
+		"name": "api-test-local-user-login",
+		"description": "This collection make api calls to create update and delete balances and operations requiren an authentication token",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get balances",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1c6c3b5a-8ed3-4001-9072-5d940201f431",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returns balances\", function () {",
+							"  pm.expect(pm.response).not.to.equal(null);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/2/{{balances}}",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"2",
+						"{{balances}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "721d637c-a2d1-486f-a9c0-aca3f8563d71",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returns balances\", function () {",
+							"  pm.expect(pm.response).not.to.equal(null);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/3/{{balances}}/2",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"3",
+						"{{balances}}",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get operations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "24e78ae5-5f10-4b8d-927b-c4348b908532",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returns balances\", function () {",
+							"  pm.expect(pm.response).not.to.equal(null);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/2/{{operations}}",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"2",
+						"{{operations}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific operation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8f85db7-92b9-479e-ac00-60e91aa33cc8",
+						"exec": [
+							"pm.globals.set(\"e_auth_token\", null);",
+							"pm.globals.set(\"e_user_id\", null);",
+							"pm.globals.set(\"e_balance_id\", null);",
+							"pm.globals.set(\"e_operation_id\", null);",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returns balances\", function () {",
+							"  pm.expect(pm.response).not.to.equal(null);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/2/{{operations}}/10",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"2",
+						"{{operations}}",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b902f228-f490-441c-86ac-9b46e599708f",
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"pm.globals.set(\"e_auth_token\", responseJson.auth_token);",
+							"pm.globals.set(\"e_user_id\", responseJson.user_id);",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"example-1@railstutorial.org\", \"password\": \"password\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/auth/login",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Operation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b3faef3a-ca8f-4313-ac1f-77c7ccb5e501",
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"pm.globals.set(\"e_operation_id\", responseJson.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"  pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{e_auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"example\", \"status\": 0, \"balance_id\": 2}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users/{{e_user_id}}/{{operations}}",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"{{e_user_id}}",
+						"{{operations}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Operation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "afa889c2-7367-4f5f-b64c-afafa056ecab",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"  pm.response.to.have.status(204);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{e_auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"updated\", \"status\": 1}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users/{{e_user_id}}/{{operations}}/{{e_operation_id}}",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"{{e_user_id}}",
+						"{{operations}}",
+						"{{e_operation_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get updated operation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "032d3f31-f8b6-4079-8226-ee3d23466f72",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{e_auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users/{{e_user_id}}/{{operations}}/{{e_operation_id}}",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"{{e_user_id}}",
+						"{{operations}}",
+						"{{e_operation_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Operation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c7b75d2f-ee12-4931-80a3-2bbd340b538b",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"  pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{e_auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/{{e_user_id}}/{{operations}}/{{e_operation_id}}",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"{{e_user_id}}",
+						"{{operations}}",
+						"{{e_operation_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Operations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f862ddb6-6259-4faa-ab1c-4cc2c3475eaf",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returns operations\", function () {",
+							"  pm.expect(pm.response).not.to.equal(null);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{e_auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/{{e_user_id}}/{{operations}}",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"{{e_user_id}}",
+						"{{operations}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Balances",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab55424c-cad8-4cb3-be22-c478c4bc3f88",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returns balances\", function () {",
+							"  pm.expect(pm.response).not.to.equal(null);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{e_auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/{{e_user_id}}/{{balances}}",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"{{e_user_id}}",
+						"{{balances}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Balance",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d93a6c43-8a1b-4085-b768-d8764c976b50",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "558cd0ce-88d2-4cea-a636-e7401605887c",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"  pm.response.to.have.status(401);",
+							"});",
+							"",
+							"pm.test(\"Returns Unauthorized State\", function () {",
+							"  pm.expect(pm.response.status).to.equal(\"Unauthorized\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{e_auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"example\", \"total\": 1000, \"category\": \"sci-fi\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users/{{e_user_id}}/{{balances}}",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"{{e_user_id}}",
+						"{{balances}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "72a98e98-a126-4955-adc1-2bead39675e5",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"  pm.response.to.have.status(401);",
+							"});",
+							"",
+							"pm.test(\"Returns Unauthorized State\", function () {",
+							"  pm.expect(pm.response.status).to.equal(\"Unauthorized\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{e_auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"updated\", \"total\": 500, \"category\": \"drama\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users/{{e_user_id}}/{{balances}}/1",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"{{e_user_id}}",
+						"{{balances}}",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "57e88a37-6b61-4212-9f55-ac4997cd9050",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{e_auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users/{{e_user_id}}/{{balances}}/3",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"{{e_user_id}}",
+						"{{balances}}",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "442a09d6-5f98-4267-93cb-9f02b647cadc",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"  pm.response.to.have.status(401);",
+							"});",
+							"",
+							"pm.test(\"Returns Unauthorized State\", function () {",
+							"  pm.expect(pm.response.status).to.equal(\"Unauthorized\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{e_auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/{{e_user_id}}/{{balances}}/1",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"{{e_user_id}}",
+						"{{balances}}",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9ac25b7b-a5ac-4596-90d2-1129f8ff5c14",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b504b291-ac69-4f9e-a96c-c4c36bb43ea5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

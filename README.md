@@ -67,19 +67,20 @@
 
 This is an API to keep track of the incomings and expenses that a user makes.
 The main goal of this API is to allow front-end developers to set up a backend in a quick and easy way to start consuming data and focus on the application client side logic not in the back.
+Also, it is a good option to have a server running locally for the development stage, in this way you are sure that the access points are reliable and fast.
 
 The main features of this API are:
 
 - Admin user.
-- Authentication via JTW Token for modification operations (create, update, destroy).
-- Any user can access to the get data from the endpoints either balances or operations.
+- Authentication via JWT Tokens restricting access to mutable data operations (create, update, destroy).
+- Any user can get access to data from the endpoints either balances or operations.
 - Only a logged in user can perform operations to their own operations (create, update, destroy).
 - Only an admin user cna perform operations to the balances, that are shared between all the users (create, update, destroy).
 
-There are 3 models on this API:
+There are 3 type of object models on this API:
 
 - Users. It can be an admin or a normal user.
-- Balances. This filed its like the categories, it can be, day, week, month or whatever you want.
+- Balances. This field perfomrms like a categories switcher, in this case balances.
 - Operations. Each incoming or expense registered by a user.
 
 Access permissions:
@@ -95,7 +96,8 @@ Access permissions:
 ### Documentation
 
 The documentation was built using raddocs.
-Please refer to it for further information.
+<br />
+<br />
 [Documentation :rocket:](https://bs-balance-ctrl-mx.herokuapp.com/api_docs)
 
 ### Built With
@@ -107,7 +109,7 @@ Please refer to it for further information.
 
 <!-- GETTING STARTED -->
 
-## Getting Started
+### Getting Started
 
 To get a local copy up and running follow these simple steps.
 
@@ -118,8 +120,8 @@ This is an example of how to list things you need to use the software and how to
 - Rails 5.2.4
 - Rspec 3.9
 - Ruby 2.6.4
-- Postman
 - Newman 5.2.0
+- npm 6.14.7
 
 ### Setup
 
@@ -150,7 +152,7 @@ $ bundle exec rspec
 If the test suite passes, you'll be ready to run the app in a local server:
 
 ```ruby
-$ rails server
+$ rails s
 ```
 
 Install the HTTP client of your preference, I used [Postman](https://www.postman.com)
@@ -159,7 +161,80 @@ Install the HTTP client of your preference, I used [Postman](https://www.postman
 
 ## Usage
 
+### Newman - Postsman
+
+In this examples im going to use postman to get more detailed information.
+You can get the postman collection and environment from
+
+```
+./app/assets/docs/newman
+```
+
+#### Setting up newman CLI.
+
+```sh
+npm install -g newman
+```
+
+#### Running newman collections.
+
+There are 4 cases collections, all of them try to perform the following operations over the balances and operations endpoints:
+
+- GET
+- POST
+- PUT
+- DELETE
+
+The 4 cases are:
+
+- Login as an admin user.
+- Login as user.
+- Signup new user.
+- No logged in user.
+
+After start the rails server, run:
+
+LOGIN ADMIN COLLECTION
+
+```sh
+newman run ./app/assets/docs/newman/api-test-local-admin-login.postman_collection.json -e ./app/assets/docs/newman/bal-ctrl-api.postman_environment.json -n 2
+```
+
+LOGIN USER COLLECTION
+
+```sh
+newman run ./app/assets/docs/newman/api-test-local-user-login.postman_collection.json -e ./app/assets/docs/newman/bal-ctrl-api.postman_environment.json -n 2
+```
+
+SIGN UP COLLECTION
+
+```sh
+newman run ./app/assets/docs/newman/api-test-local-user-signup.postman_collection.json -e ./app/assets/docs/newman/bal-ctrl-api.postman_environment.json -n 2
+```
+
+NOT LOGGED-IN USER COLLECTION
+
+```sh
+newman run ./app/assets/docs/newman/api-test-local-no-login.postman_collection.json -e ./app/assets/docs/newman/bal-ctrl-api.postman_environment.json -n 2
+```
+
+The parameter "-n 5" indicates number of iterations.
+
+### Signup
+
+This is an example of how to list things you need to use the software and how to install them.
+
 #### Signup
+
+| TIMELINE |          TODO           |                                                                         DESCRIPTION                                                                         |              OUTCOME               |
+| :------- | :---------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------: |
+| Day 1    | Deep into APIs in rails |                                      Obtain leads, knowledge and the syntax necessary for the development of the API.                                       | Understanding Rails API framework. |
+| Day 2    |       API Design        | Design the ERD diagram of the API, set up the repository and tools, start building the basic functionality of the project and test the basics using Postman | Set objectives for remaining days. |
+| Day 3    |     API Development     |                              API Development following the defined design, as well as add user authentication and unit testing                              |             API Logic              |
+| Day 4    |       API Testing       |                                                           Do a thorough Test of the completed API                                                           |            API Testing             |
+| Day 5    |    API Documentation    |                                                       API Documentation following the defined design                                                        |         API Documentation          |
+
+---
 
 <!-- ROADMAP -->
 
@@ -217,4 +292,4 @@ This project is [MIT](https://opensource.org/licenses/MIT) licensed.
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [product-screenshot]: /app/assets/images/logo_transparent.png
-[erd-diagram]: /docs/BalanceCtrlAPI_ERD.png
+[erd-diagram]: /app/assets/docs/BalanceCtrlAPI_ERD.png

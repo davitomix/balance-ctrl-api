@@ -116,6 +116,7 @@ To get a local copy up and running follow these simple steps.
 This is an example of how to list things you need to use the software and how to install them.
 
 - Rails 5.2.4
+- Rspec 3.9
 - Ruby 2.6.4
 - Postman
 - Newman 5.2.0
@@ -216,4 +217,4 @@ This project is [MIT](https://opensource.org/licenses/MIT) licensed.
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [product-screenshot]: /app/assets/images/logo_transparent.png
-[erd-diagram]: /docs/balancectrlapi_erd.png
+[erd-diagram]: /docs/BalanceCtrlAPI_ERD.png

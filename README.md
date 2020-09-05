@@ -163,8 +163,7 @@ Install the HTTP client of your preference, I used [Postman](https://www.postman
 
 ### Newman - Postsman
 
-In this examples im going to use postman to get more detailed information.
-You can get the postman collection and environment from
+Get the postman collection and environment from
 
 ```
 ./app/assets/docs/newman

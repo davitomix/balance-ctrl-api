@@ -4,7 +4,7 @@
   "http_method": "GET",
   "route": "users/:user_id/operations/:operation_id",
   "description": "Get specific user operation.",
-  "explanation": "Get a specific operation from the specified user. This an open endpoint to extract data.",
+  "explanation": "Get a specific operation from the specified user. This is a open endpoint to extract data.",
   "parameters": [
     {
       "required": true,
@@ -23,7 +23,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "users/5/operations/61",
+      "request_path": "users/14/operations/241",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
@@ -39,7 +39,7 @@
         "Content-Type": "application/json; charset=utf-8"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl -g \"http://localhost:3000/users/5/operations/61\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl -g \"http://localhost:3000/users/14/operations/241\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

@@ -4,7 +4,7 @@
   "http_method": "PUT",
   "route": "/users/:user_id/operations/:operation_id",
   "description": "Update a operation",
-  "explanation": "When given the correct params it updates an operation, returns no content. This endpoint requires a logged in user.",
+  "explanation": "When given the correct params it updates an operation, returns no content. This operation requires a logged in user.",
   "parameters": [
     {
       "required": true,
@@ -38,7 +38,7 @@
   "requests": [
     {
       "request_method": "PUT",
-      "request_path": "/users/8/operations/123",
+      "request_path": "/users/17/operations/303",
       "request_body": "{\"title\":\"Updated\",\"status\":true,\"balance_id\":3}",
       "request_headers": {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@
       "response_headers": {
       },
       "response_content_type": null,
-      "curl": "curl \"http://localhost:3000//users/8/operations/123\" -d '{\"title\":\"Updated\",\"status\":true,\"balance_id\":3}' -X PUT \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://localhost:3000//users/17/operations/303\" -d '{\"title\":\"Updated\",\"status\":true,\"balance_id\":3}' -X PUT \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

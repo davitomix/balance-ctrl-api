@@ -1,10 +1,10 @@
 {
-  "resource": "Operations",
+  "resource": "Balances",
   "resource_explanation": "Operations resources. ",
   "http_method": "GET",
-  "route": "users/:user_id/operations",
-  "description": "Get user operations.",
-  "explanation": "Get all the operations from a specified user. This is a open endpoint to extract data.",
+  "route": "users/:user_id/balances",
+  "description": "Get index balances.",
+  "explanation": "Get all the balances specified by the admin. This is a open endpoint to extract data.",
   "parameters": [
     {
       "required": true,
@@ -18,7 +18,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "users/12/operations",
+      "request_path": "users/3/balances",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
@@ -34,7 +34,7 @@
         "Content-Type": "application/json; charset=utf-8"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl -g \"http://localhost:3000/users/12/operations\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl -g \"http://localhost:3000/users/3/balances\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

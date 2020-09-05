@@ -21,6 +21,75 @@
       ]
     },
     {
+      "name": "Balances",
+      "explanation": "Operations resources. ",
+      "examples": [
+        {
+          "description": "Get index balances.",
+          "link": "balances/get_index_balances..json",
+          "groups": "all",
+          "route": "users/:user_id/balances",
+          "method": "get"
+        },
+        {
+          "description": "Balance is not found",
+          "link": "balances/balance_is_not_found.json",
+          "groups": "all",
+          "route": "users/:user_id/balances",
+          "method": "get"
+        },
+        {
+          "description": "Get specific admin balance.",
+          "link": "balances/get_specific_admin_balance..json",
+          "groups": "all",
+          "route": "users/:user_id/balances/:balance_id",
+          "method": "get"
+        },
+        {
+          "description": "Operation is not found",
+          "link": "balances/operation_is_not_found.json",
+          "groups": "all",
+          "route": "users/:user_id/balances/:balance_id",
+          "method": "get"
+        },
+        {
+          "description": "Create a balance",
+          "link": "balances/create_a_balance.json",
+          "groups": "all",
+          "route": "/users/:user_id/balances",
+          "method": "post"
+        },
+        {
+          "description": "Update a balance",
+          "link": "balances/update_a_balance.json",
+          "groups": "all",
+          "route": "/users/:user_id/balances/:balance_id",
+          "method": "put"
+        },
+        {
+          "description": "Operation is not found",
+          "link": "balances/operation_is_not_found.json",
+          "groups": "all",
+          "route": "/users/:user_id/balances/:balance_id",
+          "method": "put"
+        },
+        {
+          "description": "Delete a operation",
+          "link": "balances/delete_a_operation.json",
+          "groups": "all",
+          "route": "/users/:user_id/balances/:balance_id",
+          "method": "delete"
+        },
+        {
+          "description": "Operation is not found",
+          "link": "balances/operation_is_not_found.json",
+          "groups": "all",
+          "route": "/users/:user_id/balances/:balance_id",
+          "method": "delete"
+        }
+      ]
+    },
+    {
       "name": "Operations",
       "explanation": "Operations resources. ",
       "examples": [

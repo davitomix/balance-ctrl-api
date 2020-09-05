@@ -1,10 +1,10 @@
 {
-  "resource": "Operations",
+  "resource": "Balances",
   "resource_explanation": "Operations resources. ",
   "http_method": "POST",
-  "route": "/users/:user_id/operations",
-  "description": "Create a operation",
-  "explanation": "When given the correct params it creates an operation. This operation requires a logged in user.",
+  "route": "/users/:user_id/balances",
+  "description": "Create a balance",
+  "explanation": "When given the correct params it creates a balance. This operation requires an admin in user.",
   "parameters": [
     {
       "required": true,
@@ -18,13 +18,13 @@
     },
     {
       "required": true,
-      "name": "_status",
-      "description": "_status"
+      "name": "category",
+      "description": "category"
     },
     {
       "required": true,
-      "name": "balance_id",
-      "description": "balance_id"
+      "name": "total",
+      "description": "total"
     }
   ],
   "response_fields": [
@@ -33,8 +33,8 @@
   "requests": [
     {
       "request_method": "POST",
-      "request_path": "/users/16/operations",
-      "request_body": "{\"title\":\"Title\",\"status\":true,\"balance_id\":3}",
+      "request_path": "/users/7/balances",
+      "request_body": "{\"title\":\"Title\",\"total\":10000,\"category\":\"example\"}",
       "request_headers": {
         "Content-Type": "application/json",
         "Host": "example.org"
@@ -49,7 +49,7 @@
         "Content-Type": "application/json; charset=utf-8"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://localhost:3000//users/16/operations\" -d '{\"title\":\"Title\",\"status\":true,\"balance_id\":3}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://localhost:3000//users/7/balances\" -d '{\"title\":\"Title\",\"total\":10000,\"category\":\"example\"}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

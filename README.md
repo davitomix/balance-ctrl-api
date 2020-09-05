@@ -21,7 +21,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a target="_blank" href="https://bs-balance-ctrl-mx.herokuapp.com/api_docs"><strong>Explore the docs »</strong></a>
+  [![Balance Control API][product-screenshot]](https://github.com/davitomix/balance-ctrl-api/)
+
   <h3 align="center">Balance Control API</h3>
 
   <p align="center">
@@ -30,9 +31,7 @@
     For more further information please refer to the docs.
     <br />
     <br />
-    <a href="https://github.com/davitomix/balance-ctrl-api">
-    <img src="https://raw.githubusercontent.com/euqueme/toy-app/master/app/assets/images/mLogo.png" alt="Logo" width="80" height="80">
-    </a>
+    <a target="_blank" href="https://bs-balance-ctrl-mx.herokuapp.com/api_docs"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     ·
@@ -62,7 +61,9 @@
 
 ## About The Project
 
-[![Balance Control API][product-screenshot]](https://github.com/davitomix/balance-ctrl-api/)
+<a href="https://github.com/davitomix/balance-ctrl-api">
+  <img src="https://raw.githubusercontent.com/euqueme/toy-app/master/app/assets/images/mLogo.png" alt="Logo" width="80" height="80">
+</a>
 
 This is an API to keep track of the incomings and expenses that a user makes.
 The main goal of this API is to allow front-end developers to set up a backend in a quick and easy way to start consuming data and focus on the application client side logic not in the back.

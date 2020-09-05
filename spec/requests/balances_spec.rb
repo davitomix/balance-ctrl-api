@@ -48,7 +48,6 @@ RSpec.describe 'Balances API requested by ADMIN', type: :request do
 
   describe 'POST /balances' do
     let(:valid_attributes) do
-      # send json payload
       { user_id: user.id.to_s, title: 'Learn Elm', total: 921_978, category: 'x' }.to_json
     end
 
@@ -91,6 +90,20 @@ RSpec.describe 'Balances API requested by ADMIN', type: :request do
 
       it 'returns status code 204' do
         expect(response).to have_http_status(204)
+      end
+    end
+
+    context 'when the record doesnt exists' do
+      before { put "/users/#{user.id}/balances/#{balance_id}", params: valid_attributes, headers: headers }
+
+      let(:balance_id) { 0 }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
+
+      it 'returns a not found message' do
+        expect(response.body).to be_kind_of(String)
       end
     end
   end
@@ -188,6 +201,20 @@ RSpec.describe 'Balances API requested by USER', type: :request do
 
     context 'when the record exists' do
       before { put "/users/#{user.id}/balances/#{balance_id}", params: valid_attributes, headers: headers }
+
+      it 'doesnt allow updates the record to user' do
+        expect(response.body).to match(/Unauthorized request/)
+      end
+
+      it 'returns status code 401' do
+        expect(response).to have_http_status(401)
+      end
+    end
+
+    context 'when the record doesnt exists' do
+      before { put "/users/#{user.id}/balances/#{balance_id}", params: valid_attributes, headers: headers }
+
+      let(:balance_id) { 0 }
 
       it 'doesnt allow updates the record to user' do
         expect(response.body).to match(/Unauthorized request/)

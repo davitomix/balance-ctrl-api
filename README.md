@@ -66,8 +66,8 @@
 [![Balance Control API][product-screenshot]](https://github.com/davitomix/balance-ctrl-api/)
 
 This is an API to keep track of the incomings and expenses that a user makes.
-The main goal of this API is to allow front-end developers to set up a backend in a quick and easy way to start consuming data and focus on the application client side logic not in the back.
-Also, it is a good option to have a server running locally for the development stage, in this way you are sure that the access points are reliable and fast.
+The main goal of this API is to allow front-end developers to set up a backend in a quick and easy way in order to start consuming data and focus on the application client side logic not in the back.
+Also, it is a good option to have a server running locally for the development stage, in this way you ensure that the access points are reliable and fast.
 
 The main features of this API are:
 
@@ -75,12 +75,12 @@ The main features of this API are:
 - Authentication via JWT Tokens restricting access to mutable data operations (create, update, destroy).
 - Any user can get access to data from the endpoints either balances or operations.
 - Only a logged in user can perform operations to their own operations (create, update, destroy).
-- Only an admin user cna perform operations to the balances, that are shared between all the users (create, update, destroy).
+- Only an admin user can perform operations to the balances, that are shared between all the users (create, update, destroy).
 
 There are 3 type of object models on this API:
 
 - Users. It can be an admin or a normal user.
-- Balances. This field perfomrms like a categories switcher, in this case balances.
+- Balances. This field is like a categories switcher, in this case balances.
 - Operations. Each incoming or expense registered by a user.
 
 Access permissions:

@@ -244,40 +244,6 @@ newman run ./app/assets/docs/newman/api-test-local-no-login.postman_collection.j
 
 The parameter "-n X" indicates the number of iterations.
 
-## Examples of calling endpoints.
-
-You can find the detialed information of the endpoints along with which data you should send on each request.
-
-| ACTION 	| DESCRIPTION 	| EXAMPLE 	|
-|-	|-	|-	|
-| LOGIN 	| X 	| <a href="#">
-    <img src="./app/assets/images/p-login-user.png" alt="Logo" width="380" height="180">
-  </a> 	|
-| GET OPERATIONS 	| X 	| <a href="#">
-    <img src="./app/assets/images/noauth.png" alt="Logo">
-  </a> 	|
-| GET OPERATION 	| X 	| <a href="#">
-    <img src="./app/assets/images/noauth.png" alt="Logo">
-  </a> 	|
-| CREATE OPERATION 	| X 	| <a href="#">
-    <img src="./app/assets/images/noauth.png" alt="Logo">
-  </a> 	|
-| UPDATE OPERATION 	| X 	| <a href="#">
-    <img src="./app/assets/images/noauth.png" alt="Logo">
-  </a> 	|
-| GET BALANCE 	| X 	| <a href="#">
-    <img src="./app/assets/images/noauth.png" alt="Logo">
-  </a> 	|
-| GET BALANCES 	| X 	| <a href="#">
-    <img src="./app/assets/images/noauth.png" alt="Logo">
-  </a> 	|
-
-
-
-
-
-This is an example of how to list things you need to use the software and how to install them.
-
 <!-- ROADMAP -->
 
 ## Roadmap.

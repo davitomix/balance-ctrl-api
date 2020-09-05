@@ -28,7 +28,7 @@
   <h3 align="center">Balance Control API</h3>
 
   <p align="center">
-    This is an api developed with rails in order to allow front end developers to access a backend with everything they need to start working in a simple and easy way.
+    This is an API developed with rails in order to allow front end developers to access a backend with everything they need to start working in a simple and easy way.
     Some of the main features are: Admin user, Login, Sign Up, Token authentication, Serialization.
     For more further information please refer to the docs.
     <br />

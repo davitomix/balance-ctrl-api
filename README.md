@@ -20,8 +20,11 @@
 
 <!-- PROJECT LOGO -->
 <br />
+[![Balance Control API][product-screenshot]](https://github.com/davitomix/balance-ctrl-api/)
 <p align="center">
-  [![Balance Control API][product-screenshot]](https://github.com/davitomix/balance-ctrl-api/)
+  <a href="https://github.com/davitomix/balance-ctrl-api">
+    <img src="https://raw.githubusercontent.com/euqueme/toy-app/master/app/assets/images/mLogo.png" alt="Logo" width="80" height="80">
+  </a>
 
   <h3 align="center">Balance Control API</h3>
 
@@ -61,10 +64,11 @@
 
 ## About The Project
 
-<a href="https://github.com/davitomix/balance-ctrl-api">
-  <img src="https://raw.githubusercontent.com/euqueme/toy-app/master/app/assets/images/mLogo.png" alt="Logo" width="80" height="80">
-</a>
-
+<p align="center">
+  <a href="https://github.com/davitomix/balance-ctrl-api">
+    <img src="https://raw.githubusercontent.com/euqueme/toy-app/master/app/assets/images/mLogo.png" alt="Logo" width="80" height="80">
+  </a>
+</p>
 This is an API to keep track of the incomings and expenses that a user makes.
 The main goal of this API is to allow front-end developers to set up a backend in a quick and easy way to start consuming data and focus on the application client side logic not in the back.
 

@@ -18,13 +18,6 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -39,13 +32,14 @@
     Some of the main features are: Admin user, Login, Sign Up, Token authentication, Serialization.
     For more information about the relationships of the entities in the database, please refer to the docs folder where you can find the ERD plan.
     <br />
-    <a href="https://github.com/davitomix/balance-ctrl-api"><strong>Explore the docs »</strong></a>
+    <br />
+    <a target="_blank" href="https://bs-balance-ctrl-mx.herokuapp.com/api_docs"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     ·
-    <a href="https://github.com/davitomix/balance-ctrl-api/issues">Report Bug</a>
+    <a target="_blank" href="https://github.com/davitomix/balance-ctrl-api/issues">Report Bug</a>
     ·
-    <a href="https://github.com/davitomix/balance-ctrl-api/issues">Request Feature</a>
+    <a target="_blank" href="https://github.com/davitomix/balance-ctrl-api/issues">Request Feature</a>
   </p>
 </p>
 
@@ -96,7 +90,7 @@ Access permissions:
 
 #### ERD Diagram
 
-[![ERD Diagram][/docs/balancectrlapi_erd.png]](https://github.com/davitomix/balance-ctrl-api/)
+[![ERD Diagram][erd-diagram]](https://github.com/davitomix/balance-ctrl-api/)
 
 ### Documentation
 
@@ -221,16 +215,5 @@ This project is [MIT](https://opensource.org/licenses/MIT) licensed.
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/davitomix/repo.svg?style=flat-square
-[contributors-url]: https://github.com/davitomix/repo/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/davitomix/repo.svg?style=flat-square
-[forks-url]: https://github.com/davitomix/repo/network/members
-[stars-shield]: https://img.shields.io/github/stars/davitomix/repo.svg?style=flat-square
-[stars-url]: https://github.com/davitomix/repo/stargazers
-[issues-shield]: https://img.shields.io/github/issues/davitomix/repo.svg?style=flat-square
-[issues-url]: https://github.com/davitomix/repo/issues
-[license-shield]: https://img.shields.io/github/license/davitomix/repo.svg?style=flat-square
-[license-url]: https://github.com/davitomix/repo/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/davitomix
 [product-screenshot]: /app/assets/images/logo_transparent.png
+[erd-diagram]: /docs/balancectrlapi_erd.png

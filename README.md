@@ -42,6 +42,10 @@ $ cd balance-ctrl-api
 $ bundle exec rspec
 ```
 
+## Documentation
+
+[@docs](https://bs-balance-ctrl-mx.herokuapp.com/api_docs)
+
 ## Authors
 
 👤 **David Elí**

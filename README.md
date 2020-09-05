@@ -200,9 +200,11 @@ LOGIN ADMIN COLLECTION
 newman run ./app/assets/docs/newman/api-test-local-admin-login.postman_collection.json -e ./app/assets/docs/newman/bal-ctrl-api.postman_environment.json -n 2
 ```
 
-<a href="#">
-  <img src="./app/assets/images/admin-user.png" alt="Logo">
-</a>
+<p align="center">
+  <a href="#">
+    <img src="./app/assets/images/admin-user.png" alt="Logo">
+  </a>
+</p>
 
 LOGIN USER COLLECTION
 
@@ -210,17 +212,35 @@ LOGIN USER COLLECTION
 newman run ./app/assets/docs/newman/api-test-local-user-login.postman_collection.json -e ./app/assets/docs/newman/bal-ctrl-api.postman_environment.json -n 2
 ```
 
+<p align="center">
+  <a href="#">
+    <img src="./app/assets/images/login.png" alt="Logo">
+  </a>
+</p>
+
 SIGN UP COLLECTION
 
 ```sh
 newman run ./app/assets/docs/newman/api-test-local-user-signup.postman_collection.json -e ./app/assets/docs/newman/bal-ctrl-api.postman_environment.json -n 2
 ```
 
+<p align="center">
+  <a href="#">
+    <img src="./app/assets/images/signup.png" alt="Logo">
+  </a>
+</p>
+
 NOT AUTH USER COLLECTION
 
 ```sh
 newman run ./app/assets/docs/newman/api-test-local-no-login.postman_collection.json -e ./app/assets/docs/newman/bal-ctrl-api.postman_environment.json -n 2
 ```
+
+<p align="center">
+  <a href="#">
+    <img src="./app/assets/images/noauth.png" alt="Logo">
+  </a>
+</p>
 
 The parameter "-n 5" indicates number of iterations.
 

@@ -200,6 +200,10 @@ LOGIN ADMIN COLLECTION
 newman run ./app/assets/docs/newman/api-test-local-admin-login.postman_collection.json -e ./app/assets/docs/newman/bal-ctrl-api.postman_environment.json -n 2
 ```
 
+<a href="#">
+  <img src="./app/assets/images/admin-user.png" alt="Logo">
+</a>
+
 LOGIN USER COLLECTION
 
 ```sh
@@ -212,7 +216,7 @@ SIGN UP COLLECTION
 newman run ./app/assets/docs/newman/api-test-local-user-signup.postman_collection.json -e ./app/assets/docs/newman/bal-ctrl-api.postman_environment.json -n 2
 ```
 
-NOT LOGGED-IN USER COLLECTION
+NOT AUTH USER COLLECTION
 
 ```sh
 newman run ./app/assets/docs/newman/api-test-local-no-login.postman_collection.json -e ./app/assets/docs/newman/bal-ctrl-api.postman_environment.json -n 2
@@ -225,16 +229,6 @@ The parameter "-n 5" indicates number of iterations.
 This is an example of how to list things you need to use the software and how to install them.
 
 #### Signup
-
-| TIMELINE |          TODO           |                                                                         DESCRIPTION                                                                         |              OUTCOME               |
-| :------- | :---------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------: |
-| Day 1    | Deep into APIs in rails |                                      Obtain leads, knowledge and the syntax necessary for the development of the API.                                       | Understanding Rails API framework. |
-| Day 2    |       API Design        | Design the ERD diagram of the API, set up the repository and tools, start building the basic functionality of the project and test the basics using Postman | Set objectives for remaining days. |
-| Day 3    |     API Development     |                              API Development following the defined design, as well as add user authentication and unit testing                              |             API Logic              |
-| Day 4    |       API Testing       |                                                           Do a thorough Test of the completed API                                                           |            API Testing             |
-| Day 5    |    API Documentation    |                                                       API Documentation following the defined design                                                        |         API Documentation          |
-
----
 
 <!-- ROADMAP -->
 

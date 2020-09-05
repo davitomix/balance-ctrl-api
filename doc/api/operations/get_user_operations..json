@@ -9,7 +9,7 @@
     {
       "required": true,
       "name": "user_id",
-      "description": "This parameter specifies the user from which we want to extract the operations."
+      "description": "user_id"
     }
   ],
   "response_fields": [

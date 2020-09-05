@@ -3,8 +3,8 @@
   "resource_explanation": "Operations resources. ",
   "http_method": "DELETE",
   "route": "/users/:user_id/operations/:operation_id",
-  "description": "Operation is not found",
-  "explanation": "Not found.",
+  "description": "Delete a operation",
+  "explanation": "When given the correct params it deletes an operation, returns no content. This endpoint requires a logged in user.",
   "parameters": [
     {
       "required": true,
@@ -38,8 +38,8 @@
   "requests": [
     {
       "request_method": "DELETE",
-      "request_path": "/users/%3Auser_id/operations/0",
-      "request_body": null,
+      "request_path": "/users/10/operations/164",
+      "request_body": "{\"title\":\"Updated\",\"status\":true,\"balance_id\":3}",
       "request_headers": {
         "Content-Type": "application/json",
         "Host": "example.org"
@@ -47,14 +47,13 @@
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
-      "response_status": 404,
-      "response_status_text": "Not Found",
-      "response_body": "[binary data]",
+      "response_status": 204,
+      "response_status_text": "No Content",
+      "response_body": null,
       "response_headers": {
-        "Content-Type": "application/json; charset=utf-8"
       },
-      "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://localhost:3000//users/%3Auser_id/operations/0\" -d '' -X DELETE \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
+      "response_content_type": null,
+      "curl": "curl \"http://localhost:3000//users/10/operations/164\" -d '{\"title\":\"Updated\",\"status\":true,\"balance_id\":3}' -X DELETE \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

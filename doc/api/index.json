@@ -51,6 +51,41 @@
           "groups": "all",
           "route": "users/:user_id/operations/:operation_id",
           "method": "get"
+        },
+        {
+          "description": "Create a operation",
+          "link": "operations/create_a_operation.json",
+          "groups": "all",
+          "route": "/users/:user_id/operations",
+          "method": "post"
+        },
+        {
+          "description": "Update a operation",
+          "link": "operations/update_a_operation.json",
+          "groups": "all",
+          "route": "/users/:user_id/operations/:operation_id",
+          "method": "put"
+        },
+        {
+          "description": "Operation is not found",
+          "link": "operations/operation_is_not_found.json",
+          "groups": "all",
+          "route": "/users/:user_id/operations/:operation_id",
+          "method": "put"
+        },
+        {
+          "description": "Delete a operation",
+          "link": "operations/delete_a_operation.json",
+          "groups": "all",
+          "route": "/users/:user_id/operations/:operation_id",
+          "method": "delete"
+        },
+        {
+          "description": "Operation is not found",
+          "link": "operations/operation_is_not_found.json",
+          "groups": "all",
+          "route": "/users/:user_id/operations/:operation_id",
+          "method": "delete"
         }
       ]
     }

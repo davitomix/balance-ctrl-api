@@ -20,10 +20,9 @@
 
 <!-- PROJECT LOGO -->
 <br />
-[![Balance Control API][product-screenshot]](https://github.com/davitomix/balance-ctrl-api/)
 <p align="center">
-  <a href="https://github.com/davitomix/balance-ctrl-api">
-    <img src="https://raw.githubusercontent.com/euqueme/toy-app/master/app/assets/images/mLogo.png" alt="Logo" width="80" height="80">
+  <a href="#">
+    <img src=product-screenshot alt="Logo">
   </a>
 
   <h3 align="center">Balance Control API</h3>

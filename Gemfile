@@ -29,11 +29,11 @@ gem 'rubocop-faker'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'figaro'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-gem 'rack-cors'
-gem 'rspec_api_documentation'
-gem 'raddocs'
-gem 'rswag'
 gem 'fast_jsonapi'
+gem 'rack-cors'
+gem 'raddocs'
+gem 'rspec_api_documentation'
+gem 'rswag'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

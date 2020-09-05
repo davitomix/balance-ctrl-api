@@ -7,7 +7,6 @@ resource 'Authentication' do
   header 'Content-Type', 'application/json'
 
   post 'signup' do
-
     parameter :name, 'User name'
     parameter :email, 'User email'
     parameter :password, 'User password'
@@ -23,7 +22,6 @@ resource 'Authentication' do
   end
 
   post 'auth/login' do
-
     parameter :email, 'User email'
     parameter :password, 'User password'
 

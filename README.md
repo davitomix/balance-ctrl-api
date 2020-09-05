@@ -95,8 +95,8 @@ Access permissions:
 ### Documentation
 
 The documentation was built using raddocs.
-Please refer to it to further information.
-You can find it here [docs :rocket:](https://bs-balance-ctrl-mx.herokuapp.com/api_docs)
+Please refer to it for further information.
+[Documentation :rocket:](https://bs-balance-ctrl-mx.herokuapp.com/api_docs)
 
 ### Built With
 
@@ -149,7 +149,7 @@ $ bundle exec rspec
 
 If the test suite passes, you'll be ready to run the app in a local server:
 
-```
+```ruby
 $ rails server
 ```
 
@@ -179,10 +179,10 @@ Install the HTTP client of your preference, I used [Postman](https://www.postman
 
 ## Author
 
-👤 **David Eli Martinez Garcia**
+👤 **David García**
 
 - Github: [@davitomix](https://github.com/davitomix)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
+- Linkedin: [David G.](https://linkedin.com/linkedinhandle)
 
 <!-- CONTRIBUTING -->
 

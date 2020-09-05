@@ -28,7 +28,7 @@
   <h3 align="center">Balance Control API</h3>
 
   <p align="center">
-    This is an api developed with rails in order to allow front end developers to access a backend with everything they need to start working in a simple and fast way.
+    This is an api developed with rails in order to allow front end developers to access a backend with everything they need to start working in a simple and easy way.
     Some of the main features are: Admin user, Login, Sign Up, Token authentication, Serialization.
     For more further information please refer to the docs.
     <br />
@@ -65,10 +65,10 @@
 
 [![Balance Control API][product-screenshot]](https://github.com/davitomix/balance-ctrl-api/)
 
-This is an API to keep track of the incomings and expenses that a user makes, it can be by day, week, month or by category.
-The main goal of this API is to let the front end developers set up a backend in a quick and easy way to start an building the app and getting data.
+This is an API to keep track of the incomings and expenses that a user makes.
+The main goal of this API is to allow front-end developers to set up a backend in a quick and easy way to start consuming data and focus on the application client side logic not in the back.
 
-The main features of the API are:
+The main features of this API are:
 
 - Admin user.
 - Authentication via JTW Token for modification operations (create, update, destroy).

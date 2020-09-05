@@ -1,10 +1,10 @@
 {
   "resource": "Authentication",
-  "resource_explanation": null,
+  "resource_explanation": "Authentication resources. ",
   "http_method": "POST",
   "route": "auth/login",
-  "description": "Creating a new token",
-  "explanation": "Logs in a registered user.",
+  "description": "Generating new token - Log In",
+  "explanation": "Logs in as a registered user and generates token.",
   "parameters": [
     {
       "name": "email",

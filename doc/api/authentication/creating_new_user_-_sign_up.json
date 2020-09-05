@@ -1,10 +1,10 @@
 {
   "resource": "Authentication",
-  "resource_explanation": null,
+  "resource_explanation": "Authentication resources. ",
   "http_method": "POST",
   "route": "signup",
-  "description": "Creating a new  User",
-  "explanation": "Registers a new user in the database",
+  "description": "Creating new user - Sign Up",
+  "explanation": "Registers a new user in the database and generates token",
   "parameters": [
     {
       "name": "name",
@@ -50,7 +50,7 @@
     {
       "request_method": "POST",
       "request_path": "signup",
-      "request_body": "{\"name\":\"David\",\"email\":\"david@gmail.com\",\"password\":\"foobar\",\"password_confirmation\":\"foobar\"}",
+      "request_body": "{\"name\":\"Example\",\"email\":\"example-x@example.com\",\"password\":\"foobar\",\"password_confirmation\":\"foobar\"}",
       "request_headers": {
         "Content-Type": "application/json",
         "Host": "example.org"
@@ -65,7 +65,7 @@
         "Content-Type": "application/json; charset=utf-8"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://localhost:3000/signup\" -d '{\"name\":\"David\",\"email\":\"david@gmail.com\",\"password\":\"foobar\",\"password_confirmation\":\"foobar\"}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://localhost:3000/signup\" -d '{\"name\":\"Example\",\"email\":\"example-x@example.com\",\"password\":\"foobar\",\"password_confirmation\":\"foobar\"}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

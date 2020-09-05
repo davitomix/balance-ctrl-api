@@ -21,10 +21,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/davitomix/balance-ctrl-api">
-    <img src="https://raw.githubusercontent.com/euqueme/toy-app/master/app/assets/images/mLogo.png" alt="Logo" width="80" height="80">
-  </a>
-
+  <a target="_blank" href="https://bs-balance-ctrl-mx.herokuapp.com/api_docs"><strong>Explore the docs »</strong></a>
   <h3 align="center">Balance Control API</h3>
 
   <p align="center">
@@ -33,7 +30,9 @@
     For more further information please refer to the docs.
     <br />
     <br />
-    <a target="_blank" href="https://bs-balance-ctrl-mx.herokuapp.com/api_docs"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/davitomix/balance-ctrl-api">
+    <img src="https://raw.githubusercontent.com/euqueme/toy-app/master/app/assets/images/mLogo.png" alt="Logo" width="80" height="80">
+    </a>
     <br />
     <br />
     ·

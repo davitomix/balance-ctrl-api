@@ -1,5 +1,5 @@
 class OperationsController < ApplicationController
-  skip_before_action :authorize_request, except: %i[create update destroy]
+  skip_before_action :authorize_request, only: %i[index show]
   before_action :set_user
   before_action :set_operation, only: %i[show update destroy]
 

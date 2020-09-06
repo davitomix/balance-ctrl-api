@@ -247,15 +247,13 @@ The parameter "-n X" indicates the number of iterations.
 
 ## Roadmap.
 
-| TIMELINE |          TODO           |                                                                         DESCRIPTION                                                                         |              OUTCOME               | STATUS  |
-| :------- | :---------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------: | :-----: |
-| Day 1    | Deep into APIs in rails |                                      Tutorials, articles, videos about APIS. Understand requierements.                                       | Setup APi & ERD. | &#9745; |
-| Day 2    |       API Design        | Implement the ERD diagram of the API, set up the repository and tools, start building the basic functionality of the project and test the basics using Postman. Deploy. | Implement JWT | &#9745; |
-| Day 3    |     API Development     |                              Added JWT to all actions, refactoring code to given requierements following TDD flow.                        |             Verify behavior, setup collections on Postman.              | &#9745; |
-| Day 4    |       Checking APi responsen on postman collections, add serialization, implement cors.            | &#9745; |
-| Day 5    |    API Documentation    |                                                       Added documentation, finished Postman tests collections, tested API on production heroku.                                                        |         API Details          | &#9745; |
-
----
+| TIMELINE 	| TODO 	| DESCRIPTION 	| OUTCOME 	| STATUS 	|
+|-	|-	|-	|-	|-	|
+| Day 1 	| Deep into APIs in rails 	| Tutorials, articles, videos about APIS on Rails. Understanding database connections and requirements. 	| Setup APi & ERD. 	| &#9745; 	|
+| Day 2 	| API Design 	| Implement the ERD diagram of the API, set up the repository and tools, start building the basic functionality of the API and test the endpoints with Postman. Deploy. 	| Implement JWT 	| &#9745; 	|
+| Day 3 	| API Development 	| Added JWT to all actions, refactoring code to given requierements following TDD flow. Restricting access of certain operations. 	| Verify behavior, setup collections on Postman. 	| &#9745; 	|
+| Day 4 	| API Testing 	| Checking API responses on postman collections, add serialization, implementation of CORS. 	| API Docs 	| &#9745; 	|
+| Day 5 	| API Documentation 	| Added documentation, finished Postman tests collections, tested API on production heroku. 	| - 	| &#9745; 	|
 
 <!-- AUTHORS -->
 

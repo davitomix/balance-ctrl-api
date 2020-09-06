@@ -249,11 +249,11 @@ The parameter "-n X" indicates the number of iterations.
 
 | TIMELINE |          TODO           |                                                                         DESCRIPTION                                                                         |              OUTCOME               | STATUS  |
 | :------- | :---------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------: | :-----: |
-| Day 1    | Deep into APIs in rails |                                      Obtain leads, knowledge and the syntax necessary for the development of the API.                                       | Understanding Rails API framework. | &#9745; |
-| Day 2    |       API Design        | Design the ERD diagram of the API, set up the repository and tools, start building the basic functionality of the project and test the basics using Postman | Set objectives for remaining days. | &#9745; |
-| Day 3    |     API Development     |                              API Development following the defined design, as well as add user authentication and unit testing                              |             API Logic              | &#9745; |
-| Day 4    |       API Testing       |                                                           Do a thorough Test of the completed API                                                           |            API Testing             | &#9745; |
-| Day 5    |    API Documentation    |                                                       API Documentation following the defined design                                                        |         API Documentation          | &#9745; |
+| Day 1    | Deep into APIs in rails |                                      Tutorials, articles, videos about APIS. Understand requierements.                                       | Setup APi & ERD. | &#9745; |
+| Day 2    |       API Design        | Implement the ERD diagram of the API, set up the repository and tools, start building the basic functionality of the project and test the basics using Postman. Deploy. | Implement JWT | &#9745; |
+| Day 3    |     API Development     |                              Added JWT to all actions, refactoring code to given requierements following TDD flow.                        |             Verify behavior, setup collections on Postman.              | &#9745; |
+| Day 4    |       Checking APi responsen on postman collections, add serialization, implement cors.            | &#9745; |
+| Day 5    |    API Documentation    |                                                       Added documentation, finished Postman tests collections, tested API on production heroku.                                                        |         API Details          | &#9745; |
 
 ---
 

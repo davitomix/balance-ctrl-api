@@ -115,8 +115,6 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-
 - Rails 5.2.4
 - Rspec 3.9
 - Ruby 2.6.4

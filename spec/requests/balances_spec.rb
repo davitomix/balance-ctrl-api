@@ -73,7 +73,7 @@ RSpec.describe 'Balances API requested by ADMIN', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: Title can't be blank, Total can't be blank, Category can't be blank/)
+          .to match(/Validation failed: Title can't be blank, Title is invalid, Category can't be blank, Category is invalid, Total can't be blank, Total is invalid/)
       end
     end
   end

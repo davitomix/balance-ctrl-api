@@ -1,3 +1,4 @@
+# rubocop:disable Layout/LineLength
 require 'rails_helper'
 
 RSpec.describe 'Balances API requested by ADMIN', type: :request do
@@ -359,3 +360,4 @@ RSpec.describe 'Balances API requested by NOT LOGGED IN USER', type: :request do
     end
   end
 end
+# rubocop:enable Layout/LineLength

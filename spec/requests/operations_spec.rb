@@ -1,3 +1,4 @@
+# rubocop:disable Layout/LineLength
 require 'rails_helper'
 
 RSpec.describe 'Operations API requested by LOGGED IN USER' do
@@ -351,3 +352,4 @@ RSpec.describe 'Operations API requested by ADMIN' do
     end
   end
 end
+# rubocop:enable Layout/LineLength

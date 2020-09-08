@@ -1,0 +1,497 @@
+{
+	"info": {
+		"_postman_id": "df2e8886-0f46-4052-93c1-ab808c4975a0",
+		"name": "api-test-local-no-login",
+		"description": "This collection make api calls to create update and delete balances and operations requiren an authentication token",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get balances without token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "941d7f17-0648-4c5b-aa1a-4aa59652ec8d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returns balances\", function () {",
+							"  pm.expect(pm.response).not.to.equal(null);",
+							"});",
+							"",
+							"pm.globals.set(\"e_operation_id\", null);",
+							"pm.globals.set(\"e_balance_id\", null);",
+							"pm.globals.set(\"e_auth_token\", null);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/1/{{balances}}",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"{{balances}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Balance",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "19167599-110f-485a-a923-9fa79c06f67c",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3728379e-ad80-4ef3-8f88-727702122058",
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {",
+							"  pm.response.to.have.status(422);",
+							"});",
+							"",
+							"pm.test(\"Returns Unprocessable Entity\", function () {",
+							"  pm.expect(pm.response.status).to.equal(\"Unprocessable Entity\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"example\", \"total\": 1000, \"category\": \"sci-fi\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users/1/{{balances}}",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"{{balances}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6af430be-0435-49a8-bc33-38ff45758692",
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {",
+							"  pm.response.to.have.status(422);",
+							"});",
+							"",
+							"pm.test(\"Returns Unprocessable Entity\", function () {",
+							"  pm.expect(pm.response.status).to.equal(\"Unprocessable Entity\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"updated\", \"total\": 500, \"category\": \"drama\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users/1/{{balances}}/2",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"{{balances}}",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "45d1cdd7-9a31-4ccd-a814-14ca0996fe16",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/1/{{balances}}/6",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"{{balances}}",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Operations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "51bdb3e2-414e-476b-b7b9-3682621bfd6d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returns operations\", function () {",
+							"  pm.expect(pm.response).not.to.equal(null);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/1/{{operations}}/",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"{{operations}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Operation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f131495b-85fd-4201-a802-15ebbaa6f398",
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {",
+							"  pm.response.to.have.status(422);",
+							"});",
+							"",
+							"pm.test(\"Returns Unprocessable Entity\", function () {",
+							"  pm.expect(pm.response.status).to.equal(\"Unprocessable Entity\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"example\", \"status\": 0}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users/1/{{operations}}/",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"{{operations}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Operations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bb4026cc-86fb-4074-bca2-d573c3a14a01",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returns operations\", function () {",
+							"  pm.expect(pm.response).not.to.equal(null);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/1/{{operations}}",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"{{operations}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Operation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "25d68af5-5e83-45af-a31a-2eb5e2c5bef3",
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {",
+							"  pm.response.to.have.status(422);",
+							"});",
+							"",
+							"pm.test(\"Returns Unprocessable Entity\", function () {",
+							"  pm.expect(pm.response.status).to.equal(\"Unprocessable Entity\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"updated\", \"status\": 1}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/users/1/{{operations}}/2",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"{{operations}}",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get updated operation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d5765626-b32a-486f-aec4-ef5a0ce813f1",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/1/{{operations}}/2/",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"{{operations}}",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Operation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0a57483-ee6b-4249-803c-6e032eb173a1",
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {",
+							"  pm.response.to.have.status(422);",
+							"});",
+							"",
+							"pm.test(\"Returns Unprocessable Entity\", function () {",
+							"  pm.expect(pm.response.status).to.equal(\"Unprocessable Entity\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/1/{{operations}}/2",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"{{operations}}",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bad1c98b-ec08-417e-83dd-184689a73cea",
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {",
+							"  pm.response.to.have.status(422);",
+							"});",
+							"",
+							"pm.test(\"Returns Unprocessable Entity\", function () {",
+							"  pm.expect(pm.response.status).to.equal(\"Unprocessable Entity\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/users/1/{{balances}}/1",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"users",
+						"1",
+						"{{balances}}",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e7615e1e-6f2b-4e87-8b53-94b02d9470db",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e802d885-2f87-41f8-83e0-52f102fc7b06",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

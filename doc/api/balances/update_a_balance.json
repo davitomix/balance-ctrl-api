@@ -1,0 +1,54 @@
+{
+  "resource": "Balances",
+  "resource_explanation": "Operations resources. ",
+  "http_method": "PUT",
+  "route": "/users/:user_id/balances/:balance_id",
+  "description": "Update a balance",
+  "explanation": "When given the correct params it updates a balance. This operation requires an admin in user.",
+  "parameters": [
+    {
+      "required": true,
+      "name": "user_id",
+      "description": "user_id"
+    },
+    {
+      "required": true,
+      "name": "title",
+      "description": "title"
+    },
+    {
+      "required": true,
+      "name": "category",
+      "description": "category"
+    },
+    {
+      "required": true,
+      "name": "total",
+      "description": "total"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/users/8/balances/7",
+      "request_body": "{\"title\":\"Updated\",\"total\":10000,\"category\":\"example\"}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Host": "example.org"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 204,
+      "response_status_text": "No Content",
+      "response_body": null,
+      "response_headers": {
+      },
+      "response_content_type": null,
+      "curl": "curl \"http://localhost:3000//users/8/balances/7\" -d '{\"title\":\"Updated\",\"total\":10000,\"category\":\"example\"}' -X PUT \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

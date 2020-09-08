@@ -1,0 +1,162 @@
+{
+  "resources": [
+    {
+      "name": "Authentication",
+      "explanation": "Authentication resources. ",
+      "examples": [
+        {
+          "description": "Creating new user - Sign Up",
+          "link": "authentication/creating_new_user_-_sign_up.json",
+          "groups": "all",
+          "route": "signup",
+          "method": "post"
+        },
+        {
+          "description": "Generating new token - Log In",
+          "link": "authentication/generating_new_token_-_log_in.json",
+          "groups": "all",
+          "route": "auth/login",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "name": "Balances",
+      "explanation": "Operations resources. ",
+      "examples": [
+        {
+          "description": "Get index balances.",
+          "link": "balances/get_index_balances..json",
+          "groups": "all",
+          "route": "users/:user_id/balances",
+          "method": "get"
+        },
+        {
+          "description": "Balance is not found",
+          "link": "balances/balance_is_not_found.json",
+          "groups": "all",
+          "route": "users/:user_id/balances",
+          "method": "get"
+        },
+        {
+          "description": "Get specific admin balance.",
+          "link": "balances/get_specific_admin_balance..json",
+          "groups": "all",
+          "route": "users/:user_id/balances/:balance_id",
+          "method": "get"
+        },
+        {
+          "description": "Operation is not found",
+          "link": "balances/operation_is_not_found.json",
+          "groups": "all",
+          "route": "users/:user_id/balances/:balance_id",
+          "method": "get"
+        },
+        {
+          "description": "Create a balance",
+          "link": "balances/create_a_balance.json",
+          "groups": "all",
+          "route": "/users/:user_id/balances",
+          "method": "post"
+        },
+        {
+          "description": "Update a balance",
+          "link": "balances/update_a_balance.json",
+          "groups": "all",
+          "route": "/users/:user_id/balances/:balance_id",
+          "method": "put"
+        },
+        {
+          "description": "Operation is not found",
+          "link": "balances/operation_is_not_found.json",
+          "groups": "all",
+          "route": "/users/:user_id/balances/:balance_id",
+          "method": "put"
+        },
+        {
+          "description": "Delete a operation",
+          "link": "balances/delete_a_operation.json",
+          "groups": "all",
+          "route": "/users/:user_id/balances/:balance_id",
+          "method": "delete"
+        },
+        {
+          "description": "Operation is not found",
+          "link": "balances/operation_is_not_found.json",
+          "groups": "all",
+          "route": "/users/:user_id/balances/:balance_id",
+          "method": "delete"
+        }
+      ]
+    },
+    {
+      "name": "Operations",
+      "explanation": "Operations resources. ",
+      "examples": [
+        {
+          "description": "Get user operations.",
+          "link": "operations/get_user_operations..json",
+          "groups": "all",
+          "route": "users/:user_id/operations",
+          "method": "get"
+        },
+        {
+          "description": "User is not found",
+          "link": "operations/user_is_not_found.json",
+          "groups": "all",
+          "route": "users/:user_id/operations",
+          "method": "get"
+        },
+        {
+          "description": "Get specific user operation.",
+          "link": "operations/get_specific_user_operation..json",
+          "groups": "all",
+          "route": "users/:user_id/operations/:operation_id",
+          "method": "get"
+        },
+        {
+          "description": "Operation is not found",
+          "link": "operations/operation_is_not_found.json",
+          "groups": "all",
+          "route": "users/:user_id/operations/:operation_id",
+          "method": "get"
+        },
+        {
+          "description": "Create a operation",
+          "link": "operations/create_a_operation.json",
+          "groups": "all",
+          "route": "/users/:user_id/operations",
+          "method": "post"
+        },
+        {
+          "description": "Update a operation",
+          "link": "operations/update_a_operation.json",
+          "groups": "all",
+          "route": "/users/:user_id/operations/:operation_id",
+          "method": "put"
+        },
+        {
+          "description": "Operation is not found",
+          "link": "operations/operation_is_not_found.json",
+          "groups": "all",
+          "route": "/users/:user_id/operations/:operation_id",
+          "method": "put"
+        },
+        {
+          "description": "Delete a operation",
+          "link": "operations/delete_a_operation.json",
+          "groups": "all",
+          "route": "/users/:user_id/operations/:operation_id",
+          "method": "delete"
+        },
+        {
+          "description": "Operation is not found",
+          "link": "operations/operation_is_not_found.json",
+          "groups": "all",
+          "route": "/users/:user_id/operations/:operation_id",
+          "method": "delete"
+        }
+      ]
+    }
+  ]
+}

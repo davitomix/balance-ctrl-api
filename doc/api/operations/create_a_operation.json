@@ -1,0 +1,55 @@
+{
+  "resource": "Operations",
+  "resource_explanation": "Operations resources. ",
+  "http_method": "POST",
+  "route": "/users/:user_id/operations",
+  "description": "Create a operation",
+  "explanation": "When given the correct params it creates an operation. This operation requires a logged in user.",
+  "parameters": [
+    {
+      "required": true,
+      "name": "user_id",
+      "description": "user_id"
+    },
+    {
+      "required": true,
+      "name": "title",
+      "description": "title"
+    },
+    {
+      "required": true,
+      "name": "_status",
+      "description": "_status"
+    },
+    {
+      "required": true,
+      "name": "balance_id",
+      "description": "balance_id"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/users/16/operations",
+      "request_body": "{\"title\":\"Title\",\"status\":true,\"balance_id\":3}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Host": "example.org"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "[binary data]",
+      "response_headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://localhost:3000//users/16/operations\" -d '{\"title\":\"Title\",\"status\":true,\"balance_id\":3}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

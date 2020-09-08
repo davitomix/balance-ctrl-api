@@ -1,0 +1,45 @@
+{
+  "resource": "Operations",
+  "resource_explanation": "Operations resources. ",
+  "http_method": "GET",
+  "route": "users/:user_id/operations/:operation_id",
+  "description": "Get specific user operation.",
+  "explanation": "Get a specific operation from the specified user. This is a open endpoint to extract data.",
+  "parameters": [
+    {
+      "required": true,
+      "name": "user_id",
+      "description": "user_id"
+    },
+    {
+      "required": true,
+      "name": "operation_id",
+      "description": "operation_id"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "users/14/operations/241",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Host": "example.org"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[binary data]",
+      "response_headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl -g \"http://localhost:3000/users/14/operations/241\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "resource": "Operations",
+  "resource_explanation": "Operations resources. ",
+  "http_method": "DELETE",
+  "route": "/users/:user_id/operations/:operation_id",
+  "description": "Delete a operation",
+  "explanation": "When given the correct params it deletes an operation, returns no content. This operation requires a logged in user.",
+  "parameters": [
+    {
+      "required": true,
+      "name": "user_id",
+      "description": "user_id"
+    },
+    {
+      "required": true,
+      "name": "operation_id",
+      "description": "operation_id"
+    },
+    {
+      "required": true,
+      "name": "title",
+      "description": "title"
+    },
+    {
+      "required": true,
+      "name": "_status",
+      "description": "_status"
+    },
+    {
+      "required": true,
+      "name": "balance_id",
+      "description": "balance_id"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "DELETE",
+      "request_path": "/users/19/operations/344",
+      "request_body": "{\"title\":\"Updated\",\"status\":true,\"balance_id\":3}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Host": "example.org"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 204,
+      "response_status_text": "No Content",
+      "response_body": null,
+      "response_headers": {
+      },
+      "response_content_type": null,
+      "curl": "curl \"http://localhost:3000//users/19/operations/344\" -d '{\"title\":\"Updated\",\"status\":true,\"balance_id\":3}' -X DELETE \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

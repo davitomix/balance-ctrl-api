@@ -14,11 +14,9 @@ class ApplicationController < ActionController::API
     @current_user = AuthorizeApiRequest.new(request.headers).call[:user]
   end
 
-  # rubocop:disable Style/GuardClause
   def authorize_admin_request
-    unless AuthorizeApiRequest.new(request.headers).call[:admin]
-      raise(ExceptionHandler::AuthenticationError, Message.unauthorized)
-    end
+    return if AuthorizeApiRequest.new(request.headers).call[:admin]
+
+    raise(ExceptionHandler::AuthenticationError, Message.unauthorized)
   end
-  # rubocop:enable Style/GuardClause
 end

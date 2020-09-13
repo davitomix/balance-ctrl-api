@@ -1,6 +1,6 @@
 class BalancesController < ApplicationController
   skip_before_action :authorize_request, only: %i[index show]
-  before_action :admin_user, only: %i[create update destroy]
+  skip_before_action :authorize_admin_request, only: %i[index show]
   before_action :set_user
   before_action :set_balance, only: %i[update destroy]
 
@@ -45,10 +45,5 @@ class BalancesController < ApplicationController
 
   def set_balance
     @balance = @user.balances.find_by!(id: params[:id]) if @user
-  end
-
-  # Confirms an admin user.
-  def admin_user
-    raise(ExceptionHandler::AuthenticationError, Message.unauthorized) unless current_user.admin?
   end
 end

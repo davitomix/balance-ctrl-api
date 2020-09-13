@@ -4,6 +4,7 @@ class ApplicationController < ActionController::API
 
   # called before every action on controllers
   before_action :authorize_request
+  before_action :authorize_admin_request
   attr_reader :current_user
 
   private
@@ -12,4 +13,12 @@ class ApplicationController < ActionController::API
   def authorize_request
     @current_user = AuthorizeApiRequest.new(request.headers).call[:user]
   end
+
+  # rubocop:disable Style/GuardClause
+  def authorize_admin_request
+    unless AuthorizeApiRequest.new(request.headers).call[:admin]
+      raise(ExceptionHandler::AuthenticationError, Message.unauthorized)
+    end
+  end
+  # rubocop:enable Style/GuardClause
 end

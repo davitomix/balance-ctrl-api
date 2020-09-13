@@ -12,7 +12,7 @@ resource 'Operations' do
   explanation 'Operations resources. '
 
   before do
-    header 'Authorization', token_generator(user.id)
+    header 'Authorization', token_generator(user.id, user.admin)
     header 'Content-Type', 'application/json'
   end
 

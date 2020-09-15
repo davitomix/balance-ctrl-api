@@ -100,6 +100,10 @@ The documentation was built using raddocs.
 <br />
 [Documentation :rocket:](https://bs-balance-ctrl-mx.herokuapp.com/api_docs)
 
+### Requierements
+
+[Requierements :rocket:](https://www.notion.so/Final-Capstone-Project-Tracking-App-backend-only-variant-e943f483f1054e01b80d5bfc69c6cea9)
+
 ### Built With
 
 - Postman, Newman.

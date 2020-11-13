@@ -263,8 +263,8 @@ The parameter "-n X" indicates the number of iterations.
 
 👤 **David García**
 
-- Github: [@davitomix](https://github.com/davitomix)
-- LinkedIn: [David G.](https://linkedin.com/linkedinhandle)
+- Github: [@davomartinez-dev](https://github.com/davomartinez-dev)
+- LinkedIn: [David Martinez.](https://www.linkedin.com/in/davidelimartinez/)
 
 <!-- CONTRIBUTING -->
 

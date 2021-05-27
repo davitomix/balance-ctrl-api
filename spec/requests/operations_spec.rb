@@ -2,12 +2,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Operations API requested by LOGGED IN USER' do
-  let(:user) { create(:user, password_confirmation: 'foobar') }
-  # Initialize the test data
-  let!(:balance) { create(:balance, user_id: user.id) }
-  let!(:operations) { create_list(:operation, 20, balance_id: balance.id, status: 1, user_id: user.id) }
+  let!(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
+  let!(:balance) { BalanceFactory.create(user_id: user.id) }
+  let!(:operation) { OperationFactory.create(user: user, balance_id: balance.id) }
   let(:balance_id) { balance.id }
-  let(:id) { operations.first.id }
+  let(:id) { operation.id }
   let(:headers) { valid_headers }
 
   # Test suite for GET /users/:user_id/operations
@@ -20,7 +19,7 @@ RSpec.describe 'Operations API requested by LOGGED IN USER' do
       end
 
       it 'returns all user operations' do
-        expect(json.size).to eq(20)
+        expect(json.size).to eq(1)
       end
     end
   end
@@ -114,12 +113,11 @@ RSpec.describe 'Operations API requested by LOGGED IN USER' do
 end
 
 RSpec.describe 'Operations API requested by NOT LOGGED IN USER' do
-  let(:user) { create(:user, password_confirmation: 'foobar') }
-  # Initialize the test data
-  let!(:balance) { create(:balance, user_id: user.id) }
-  let!(:operations) { create_list(:operation, 20, balance_id: balance.id, status: 1, user_id: user.id) }
+  let!(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
+  let!(:balance) { BalanceFactory.create(user_id: user.id) }
+  let!(:operation) { OperationFactory.create(user: user, balance_id: balance.id) }
   let(:balance_id) { balance.id }
-  let(:id) { operations.first.id }
+  let(:id) { operation.id }
   let(:headers) { invalid_headers }
 
   # Test suite for GET /users/:user_id/operations
@@ -132,7 +130,7 @@ RSpec.describe 'Operations API requested by NOT LOGGED IN USER' do
       end
 
       it 'returns all user operations' do
-        expect(json.size).to eq(20)
+        expect(json.size).to eq(1)
       end
     end
   end
@@ -229,13 +227,11 @@ RSpec.describe 'Operations API requested by NOT LOGGED IN USER' do
 end
 
 RSpec.describe 'Operations API requested by ADMIN' do
-  let(:user) { create(:user, admin: true, password_confirmation: 'foobar') }
-  # Initialize the test data
-  let!(:balance) { create(:balance, user_id: user.id) }
-  let(:operation) { create(:operation, user_id: user.id, balance_id: balance.id) }
-  let!(:operations) { create_list(:operation, 20, balance_id: balance.id, status: 1, user_id: user.id) }
+  let!(:user) { UserFactory.create(password: 'password', password_confirmation: 'password', admin: true) }
+  let!(:balance) { BalanceFactory.create(user_id: user.id) }
+  let!(:operation) { OperationFactory.create(user: user, balance_id: balance.id) }
   let(:balance_id) { balance.id }
-  let(:id) { operations.first.id }
+  let(:id) { operation.id }
   let(:headers) { valid_headers }
 
   # Test suite for GET /users/:user_id/operations
@@ -248,7 +244,7 @@ RSpec.describe 'Operations API requested by ADMIN' do
       end
 
       it 'returns all user operations' do
-        expect(json.size).to eq(20)
+        expect(json.size).to eq(1)
       end
     end
   end

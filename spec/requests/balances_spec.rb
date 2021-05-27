@@ -2,9 +2,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Balances API requested by ADMIN', type: :request do
-  let(:user) { create(:user, admin: true) }
-  let!(:balances) { create_list(:balance, 10, user_id: user.id) }
-  let(:balance_id) { balances.first.id }
+  let!(:user) { UserFactory.create(password: 'password', password_confirmation: 'password', admin: true) }
+  let!(:balance) { BalanceFactory.create(user_id: user.id) }
+  let(:balance_id) { balance.id }
   let(:headers) { valid_headers }
 
   describe 'GET /balances' do
@@ -12,7 +12,7 @@ RSpec.describe 'Balances API requested by ADMIN', type: :request do
 
     it 'returns balances' do
       expect(json).not_to be_empty
-      expect(json.size).to eq(10)
+      expect(json.size).to eq(1)
     end
 
     it 'returns status code 200' do
@@ -119,9 +119,9 @@ RSpec.describe 'Balances API requested by ADMIN', type: :request do
 end
 
 RSpec.describe 'Balances API requested by LOGGED IN USER', type: :request do
-  let(:user) { create(:user) }
-  let!(:balances) { create_list(:balance, 10, user_id: user.id) }
-  let(:balance_id) { balances.first.id }
+  let!(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
+  let!(:balance) { BalanceFactory.create(user_id: user.id) }
+  let(:balance_id) { balance.id }
   let(:headers) { valid_headers }
 
   describe 'GET /balances' do
@@ -129,7 +129,7 @@ RSpec.describe 'Balances API requested by LOGGED IN USER', type: :request do
 
     it 'returns balances' do
       expect(json).not_to be_empty
-      expect(json.size).to eq(10)
+      expect(json.size).to eq(1)
     end
 
     it 'returns status code 200' do
@@ -241,9 +241,9 @@ RSpec.describe 'Balances API requested by LOGGED IN USER', type: :request do
 end
 
 RSpec.describe 'Balances API requested by NOT LOGGED IN USER', type: :request do
-  let(:user) { create(:user) }
-  let!(:balances) { create_list(:balance, 10, user_id: user.id) }
-  let(:balance_id) { balances.first.id }
+  let!(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
+  let!(:balance) { BalanceFactory.create(user_id: user.id) }
+  let(:balance_id) { balance.id }
   let(:headers) { invalid_headers }
 
   describe 'GET /balances' do
@@ -251,7 +251,7 @@ RSpec.describe 'Balances API requested by NOT LOGGED IN USER', type: :request do
 
     it 'returns balances' do
       expect(json).not_to be_empty
-      expect(json.size).to eq(10)
+      expect(json.size).to eq(1)
     end
 
     it 'returns status code 200' do

@@ -22,6 +22,7 @@ end
 
 RSpec.configure do |config|
   Dir[File.join(__dir__, 'factories', '*.rb')].sort.each { |file| require file }
+  Dir[File.join(__dir__, 'support', '*.rb')].sort.each { |file| require file }
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
 
@@ -38,6 +39,8 @@ RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
+  config.include RequestSpecHelper
+  config.include ControllerSpecHelper
 
   if Bullet.enable?
     config.before(:each) do

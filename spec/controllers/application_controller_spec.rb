@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ApplicationController, type: :controller do
   # create test user
-  let!(:user) { create(:user) }
+  let!(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
   # set headers for authorization
   let(:headers) { { 'Authorization' => token_generator(user.id, user.admin) } }
   let(:invalid_headers) { { 'Authorization' => nil } }

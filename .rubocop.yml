@@ -1,59 +1,89 @@
+require: rubocop-rails
+
 AllCops:
+  SuggestExtensions: false
   Exclude:
-    - 'db/**/*'
-    - 'bin/*'
-    - 'config/**/*'
-    - 'Guardfile'
-    - 'Rakefile'
-    - 'node_modules/**/*'
+    - bin/*
+    - db/*
+    - db/migrate/*
+    - db/seeds/*
+    - Guardfile
+    - spec/factories/*
+    - lib/fsmb/pdc_client.rb
+    - vendor/**/*
+  NewCops:
+    enable
 
-  DisplayCopNames: true
+Lint/SymbolConversion:
+  Enabled: false
 
-Layout/LineLength:
-  Max: 120
-Metrics/MethodLength:
-  Include:
-    - 'app/controllers/*'
-    - 'app/models/*'
-  Max: 20
-Metrics/AbcSize:
-  Include:
-    - 'app/controllers/*'
-    - 'app/models/*'
-  Max: 50
-Metrics/ClassLength:
-  Max: 150
-Metrics/BlockLength:
-  ExcludedMethods: ['describe']
-  Max: 30
-
-Style/Documentation:
-  Enabled: false
-Style/ClassAndModuleChildren:
-  Enabled: false
-Style/EachForSimpleLoop:
-  Enabled: false
-Style/AndOr:
-  Enabled: false
-Style/DefWithParentheses:
-  Enabled: false
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
 
-Layout/HashAlignment:
-  EnforcedColonStyle: key
-Layout/ExtraSpacing:
-  AllowForAlignment: false
+Style/MutableConstant:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/LineLength:
+  Max: 120
+
 Layout/MultilineMethodCallIndentation:
-  Enabled: true
   EnforcedStyle: indented
-Lint/RaiseException:
+
+Metrics/MethodLength:
+  Max: 35
+  Exclude:
+    - app/controllers/api/cyberwrite_informations_controller.rb
+    - lib/hubspot/*
+
+Metrics/AbcSize:
+  Exclude:
+    - lib/hubspot/*
+    - app/searchers/*
+    - spec/factories/*
+    - spec/rails_helper.rb
+
+Metrics/ClassLength:
+  Max: 150
+
+Style/Documentation:
   Enabled: false
-Lint/StructNewOverride:
+
+Naming/VariableNumber:
   Enabled: false
-Style/HashEachMethods:
+
+Style/ClassAndModuleChildren:
   Enabled: false
-Style/HashTransformKeys:
+
+Style/HashAsLastArrayItem:
   Enabled: false
-Style/HashTransformValues:
+
+Style/OptionalBooleanParameter:
   Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/ApplicationController:
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
+Rails/EnvironmentVariableAccess:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - spec/**/*

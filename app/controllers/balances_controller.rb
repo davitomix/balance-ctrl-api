@@ -17,7 +17,7 @@ class BalancesController < ApplicationController
 
   # GET /users/balances/:id
   def show
-    json_response(User.first.balances.find_by!(id: params[:id]))
+    json_response(User.first.balances.find(params[:id]))
   end
 
   # PUT /users/balances/:id
@@ -40,10 +40,10 @@ class BalancesController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by!(id: params[:user_id])
+    @user = User.find(params[:user_id])
   end
 
   def set_balance
-    @balance = @user.balances.find_by!(id: params[:id]) if @user
+    @balance = @user.balances.find(params[:id]) if @user
   end
 end

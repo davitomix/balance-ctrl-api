@@ -11,6 +11,7 @@ Rails.application.configure do
   config.eager_load = false
   config.consider_all_requests_local = true
 
+  # rubocop:disable Rails/FilePath
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true
 
@@ -22,6 +23,7 @@ Rails.application.configure do
     config.action_controller.perform_caching = false
     config.cache_store = :null_store
   end
+  # rubocop:enable Rails/FilePath
 
   config.active_storage.service = :local
   config.action_mailer.raise_delivery_errors = false

@@ -39,10 +39,10 @@ class OperationsController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by!(id: params[:user_id])
+    @user = User.find(params[:user_id])
   end
 
   def set_operation
-    @operation = @user.operations.find_by!(id: params[:id]) if @user
+    @operation = @user.operations.find(params[:id]) if @user
   end
 end

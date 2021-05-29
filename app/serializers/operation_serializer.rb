@@ -1,4 +1,5 @@
 class OperationSerializer
-  include FastJsonapi::ObjectSerializer
-  attributes :title, :status, :user_id, :balance_id
+  def serialize(operation)
+    operation.serializable_hash
+  end
 end

@@ -1,44 +1,36 @@
 class BalancesController < ApplicationController
-  skip_before_action :authorize_request, only: %i[index show]
-  skip_before_action :authorize_admin_request, only: %i[index show]
-
-  before_action :set_user
-  before_action :set_balance, only: %i[update destroy]
+  skip_before_action :authorize_admin, only: %i[index show]
 
   def index
-    json_response(User.first.balances)
+    render json: { balances: current_user.balances }, status: :ok
   end
 
   def create
-    @balance = current_user.balances.create!(balance_params)
-    json_response(@balance, :created)
+    balance = current_user.balances.create!(balance_params)
+    render json: balance, status: :created
   end
 
   def show
-    json_response(User.first.balances.find(params[:id]))
+    render json: { balance: find_balance }, status: :ok
   end
 
   def update
-    @balance.update(balance_params)
+    find_balance.update!(balance_params)
     head :no_content
   end
 
   def destroy
-    @balance.destroy
+    find_balance.destroy
     head :no_content
   end
 
   private
 
+  def find_balance
+    Balance.find(params[:id])
+  end
+
   def balance_params
-    params.permit(:title, :total, :category)
-  end
-
-  def set_user
-    @user = User.find(params[:user_id])
-  end
-
-  def set_balance
-    @balance = @user.balances.find(params[:id]) if @user
+    params.require(:balance).permit(:title, :total, :category, :user_id)
   end
 end

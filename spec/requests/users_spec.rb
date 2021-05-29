@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'Users API', type: :request do
-  let!(:user) { User.new(password: 'password', password_confirmation: 'password') }
+RSpec.describe 'UsersController', type: :request do
+  let(:user) { User.new(password: 'password', password_confirmation: 'password') }
   let(:headers) { valid_headers.except('Authorization') }
 
   describe 'POST /signup' do
@@ -43,7 +43,7 @@ RSpec.describe 'Users API', type: :request do
         data = JSON.parse(response.body)
 
         expect(response).to have_http_status(422)
-        expect(data['message']).not_to be_nil
+        expect(data['message']).to match(/Validation failed/)
         expect(data['auth_token']).to be_nil
         expect(data['user_id']).to be_nil
       end

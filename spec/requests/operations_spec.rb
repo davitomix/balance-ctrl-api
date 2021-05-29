@@ -1,10 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe 'OperationsController', type: :request do
-  describe 'GET /operations' do
-    let(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
-    let(:headers) { valid_headers }
+  let(:user) do
+    UserFactory.create(
+      password: 'password',
+      password_confirmation: 'password'
+    )
+  end
+  let(:headers) { valid_headers }
 
+  describe 'GET /operations' do
     it 'returns serialized operation' do
       operation_1 = OperationFactory.create(user: user)
       operation_2 = OperationFactory.create(user: user)
@@ -14,14 +19,12 @@ RSpec.describe 'OperationsController', type: :request do
       data = JSON.parse(response.body)
 
       expect(response).to have_http_status(:ok)
-      expect(data['operations'].map { |o| o['id'] }).to match_array([operation_1.id, operation_2.id])
+      expect(data['operations'].map { |o| o['id'] })
+        .to match_array([operation_1.id, operation_2.id])
     end
   end
 
   describe 'GET /operation/:id' do
-    let(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
-    let(:headers) { valid_headers }
-
     it 'returns serialized operation' do
       operation = OperationFactory.create(user: user)
 
@@ -30,7 +33,9 @@ RSpec.describe 'OperationsController', type: :request do
       data = JSON.parse(response.body)
 
       expect(response).to have_http_status(:ok)
-      expect(data).to eq(OperationSerializer.new.serialize(operation.reload).as_json)
+      expect(data).to eq(
+        OperationSerializer.new.serialize(operation.reload).as_json
+      )
     end
 
     it 'handles not_found error' do
@@ -44,9 +49,6 @@ RSpec.describe 'OperationsController', type: :request do
   end
 
   describe 'POST /operations' do
-    let(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
-    let(:headers) { valid_headers }
-
     it 'returns status code 201' do
       post '/operations',
            headers: headers,
@@ -86,9 +88,6 @@ RSpec.describe 'OperationsController', type: :request do
   end
 
   describe 'PUT /operations/:id' do
-    let(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
-    let(:headers) { valid_headers }
-
     it 'returns status code 201' do
       operation = OperationFactory.create(user: user)
 
@@ -102,7 +101,7 @@ RSpec.describe 'OperationsController', type: :request do
             }
           }.to_json
 
-      operation = Operation.last
+      operation.reload
 
       expect(response).to have_http_status(:no_content)
       expect(operation.title).to eq('New title')
@@ -111,7 +110,12 @@ RSpec.describe 'OperationsController', type: :request do
     end
 
     it 'handles validation error' do
-      operation = OperationFactory.create(user: user, title: 'A title', status: 0, balance_id: 2)
+      operation = OperationFactory.create(
+        user: user,
+        title: 'A title',
+        status: 0,
+        balance_id: 2
+      )
 
       put "/operations/#{operation.id}",
           headers: headers,
@@ -134,9 +138,6 @@ RSpec.describe 'OperationsController', type: :request do
   end
 
   describe 'DELETE /operation/:id' do
-    let(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
-    let(:headers) { valid_headers }
-
     it 'returns serialized operation' do
       operation = OperationFactory.create(user: user)
 

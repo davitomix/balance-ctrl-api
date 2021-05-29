@@ -17,12 +17,12 @@ class BalanceFactory
         title: params.fetch(:title, Faker::Lorem.sentence(word_count: 5)),
         total: params.fetch(:email, Faker::Number.number(digits: 8)),
         category: params.fetch(:category, Faker::IndustrySegments.industry),
-        user_id: params.fetch(:user_id) { user.id }
+        user_id: params.fetch(:user_id, user.id),
       }
     end
 
     def user
-      UserFactory.create(password: 'password')
+      @user ||= UserFactory.create(password: 'password')
     end
   end
 end

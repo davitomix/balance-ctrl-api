@@ -16,17 +16,17 @@ class OperationFactory
       {
         title: params.fetch(:title, Faker::Lorem.sentence(word_count: 3)),
         status: params.fetch(:status, rand(0...9)),
-        user: params.fetch(:user) { user },
+        user: params[:user] || user ,
         balance_id: params.fetch(:balance_id, balance.id)
       }
     end
 
     def user
-      UserFactory.create(password: 'password')
+      @user ||= UserFactory.create(password: 'password')
     end
 
     def balance
-      BalanceFactory.create(user_id: user.id)
+      @balance ||= BalanceFactory.create(user_id: user.id)
     end
   end
 end

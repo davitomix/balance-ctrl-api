@@ -1,351 +1,154 @@
-# rubocop:disable Layout/LineLength
 require 'rails_helper'
 
-RSpec.describe 'Operations API requested by LOGGED IN USER' do
-  let!(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
-  let!(:balance) { BalanceFactory.create(user_id: user.id) }
-  let!(:operation) { OperationFactory.create(user: user, balance_id: balance.id) }
-  let(:balance_id) { balance.id }
-  let(:id) { operation.id }
-  let(:headers) { valid_headers }
+RSpec.describe 'OperationsController', type: :request do
+  describe 'GET /operations' do
+    let(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
+    let(:headers) { valid_headers }
 
-  # Test suite for GET /users/:user_id/operations
-  describe 'GET /users/:user_id/operations' do
-    before { get "/users/#{user.id}/operations", params: {}, headers: headers }
+    it 'returns serialized operation' do
+      operation_1 = OperationFactory.create(user: user)
+      operation_2 = OperationFactory.create(user: user)
 
-    context 'when operations exists' do
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
+      get '/operations', headers: headers
 
-      it 'returns all user operations' do
-        expect(json.size).to eq(1)
-      end
+      data = JSON.parse(response.body)
+
+      expect(response).to have_http_status(:ok)
+      expect(data['operations'].map { |o| o['id'] }).to match_array([operation_1.id, operation_2.id])
     end
   end
 
-  # Test suite for GET /users/:user_id/operations/:id
-  describe 'GET /users/:user_id/operations/:id' do
-    before { get "/users/#{user.id}/operations/#{id}", params: {}, headers: headers }
+  describe 'GET /operation/:id' do
+    let(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
+    let(:headers) { valid_headers }
 
-    context 'when user operation exists' do
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
+    it 'returns serialized operation' do
+      operation = OperationFactory.create(user: user)
 
-      it 'returns the operation' do
-        expect(json['id']).to eq(id)
-      end
+      get "/operations/#{operation.id}", headers: headers
+
+      data = JSON.parse(response.body)
+
+      expect(response).to have_http_status(:ok)
+      expect(data).to eq(OperationSerializer.new.serialize(operation.reload).as_json)
+    end
+
+    it 'handles not_found error' do
+      get '/operations/0', headers: headers
+
+      data = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(:not_found)
+      expect(data[:id]).to be_nil
     end
   end
 
-  # Test suite for POST /users/:user_id/operations
-  describe 'POST /users/:user_id/operations' do
-    let(:valid_attributes) { { title: 'Visit Narnia', status: 2, balance_id: 2 }.to_json }
+  describe 'POST /operations' do
+    let(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
+    let(:headers) { valid_headers }
 
-    context 'when request attributes are valid' do
-      before do
-        post "/users/#{user.id}/operations", params: valid_attributes, headers: headers
-      end
+    it 'returns status code 201' do
+      post '/operations',
+           headers: headers,
+           params: {
+             operation: {
+               title: 'Visit Narnia',
+               status: 4,
+               balance_id: 2
+             }
+           }.to_json
 
-      it 'returns status code 201' do
-        expect(response).to have_http_status(201)
-      end
+      operation = Operation.last
 
-      it 'returns the object created' do
-        expect(json).to be_a(Hash)
-      end
+      expect(response).to have_http_status(:created)
+      expect(operation.title).to eq('Visit Narnia')
+      expect(operation.status).to eq(4)
+      expect(operation.balance_id).to eq(2)
     end
 
-    context 'when an invalid request' do
-      before { post "/users/#{user.id}/operations", params: {}, headers: headers }
+    it 'handles validation error' do
+      post '/operations',
+           headers: headers,
+           params: {
+             operation: {
+               title: nil,
+               status: nil,
+               balance_id: nil
+             }
+           }.to_json
 
-      it 'returns status code 422' do
-        expect(response).to have_http_status(422)
-      end
+      data = JSON.parse(response.body, symbolize_names: true)
 
-      it 'returns a failure message' do
-        expect(response.body).to match(/Validation failed: Balance can't be blank, Title can't be blank, Title is invalid, Status can't be blank, Status is invalid/)
-      end
-    end
-  end
-
-  # Test suite for PUT /users/:user_id/operations/:id
-  describe 'PUT /users/:user_id/operations/:id' do
-    let(:valid_attributes) { { title: 'Mozart' }.to_json }
-
-    before do
-      put "/users/#{user.id}/operations/#{id}", params: valid_attributes, headers: headers
-    end
-
-    context 'when operation exists' do
-      it 'returns status code 204' do
-        expect(response).to have_http_status(204)
-      end
-
-      it 'updates the operation' do
-        updated_item = Operation.find(id)
-        expect(updated_item.title).to match(/Mozart/)
-      end
-    end
-
-    context 'when the operation does not exist' do
-      let(:id) { 0 }
-
-      it 'returns status code 404' do
-        expect(response).to have_http_status(404)
-      end
-
-      it 'returns a not found message' do
-        expect(response.body).to match(/Couldn't find Operation/)
-      end
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(Operation.all.count).to be_zero
+      expect(data[:id]).to be_nil
     end
   end
 
-  # Test suite for DELETE /balances/:id
-  describe 'DELETE /balances/:id' do
-    before { delete "/users/#{user.id}/operations/#{id}", params: {}, headers: headers }
+  describe 'PUT /operations/:id' do
+    let(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
+    let(:headers) { valid_headers }
 
-    it 'returns status code 204' do
-      expect(response).to have_http_status(204)
-    end
-  end
-end
+    it 'returns status code 201' do
+      operation = OperationFactory.create(user: user)
 
-RSpec.describe 'Operations API requested by NOT LOGGED IN USER' do
-  let!(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
-  let!(:balance) { BalanceFactory.create(user_id: user.id) }
-  let!(:operation) { OperationFactory.create(user: user, balance_id: balance.id) }
-  let(:balance_id) { balance.id }
-  let(:id) { operation.id }
-  let(:headers) { invalid_headers }
+      put "/operations/#{operation.id}",
+          headers: headers,
+          params: {
+            operation: {
+              title: 'New title',
+              status: 4,
+              balance_id: 2
+            }
+          }.to_json
 
-  # Test suite for GET /users/:user_id/operations
-  describe 'GET /users/:user_id/operations' do
-    before { get "/users/#{user.id}/operations", params: {}, headers: headers }
+      operation = Operation.last
 
-    context 'when operations exists' do
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
-
-      it 'returns all user operations' do
-        expect(json.size).to eq(1)
-      end
-    end
-  end
-
-  # Test suite for GET /users/:user_id/operations/:id
-  describe 'GET /users/:user_id/operations/:id' do
-    before { get "/users/#{user.id}/operations/#{id}", params: {}, headers: headers }
-
-    context 'when user operation exists' do
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
-
-      it 'returns the operation' do
-        expect(json['id']).to eq(id)
-      end
-    end
-  end
-
-  # Test suite for POST /users/:user_id/operations
-  describe 'POST /users/:user_id/operations' do
-    let(:valid_attributes) { { title: 'Visit Narnia', status: 2, balance_id: 2 }.to_json }
-
-    context 'when request attributes are valid' do
-      before do
-        post "/users/#{user.id}/operations", params: valid_attributes, headers: headers
-      end
-
-      it 'returns status code 422' do
-        expect(response).to have_http_status(422)
-      end
-
-      it 'returns the a failure message' do
-        expect(json['message']).to match(/Missing token/)
-      end
+      expect(response).to have_http_status(:no_content)
+      expect(operation.title).to eq('New title')
+      expect(operation.status).to eq(4)
+      expect(operation.balance_id).to eq(2)
     end
 
-    context 'when an invalid request' do
-      before { post "/users/#{user.id}/operations", params: {}, headers: headers }
+    it 'handles validation error' do
+      operation = OperationFactory.create(user: user, title: 'A title', status: 0, balance_id: 2)
 
-      it 'returns status code 422' do
-        expect(response).to have_http_status(422)
-      end
+      put "/operations/#{operation.id}",
+          headers: headers,
+          params: {
+            operation: {
+              title: nil,
+              status: nil,
+              balance_id: nil
+            }
+          }.to_json
 
-      it 'returns a failure message' do
-        expect(response.body).to match(/Missing token/)
-      end
+      data = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(operation.title).to eq('A title')
+      expect(operation.status).to eq(0)
+      expect(operation.balance_id).to eq(2)
+      expect(data[:id]).to be_nil
     end
   end
 
-  # Test suite for PUT /users/:user_id/operations/:id
-  describe 'PUT /users/:user_id/operations/:id' do
-    let(:valid_attributes) { { title: 'Mozart' }.to_json }
+  describe 'DELETE /operation/:id' do
+    let(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
+    let(:headers) { valid_headers }
 
-    before do
-      put "/users/#{user.id}/operations/#{id}", params: valid_attributes, headers: headers
+    it 'returns serialized operation' do
+      operation = OperationFactory.create(user: user)
+
+      delete "/operations/#{operation.id}", headers: headers
+
+      expect(response).to have_http_status(:no_content)
     end
 
-    context 'when operation exists' do
-      it 'returns status code 422' do
-        expect(response).to have_http_status(422)
-      end
+    it 'handles not_found error' do
+      delete '/operations/0', headers: headers
 
-      it 'returns the a failure message' do
-        expect(json['message']).to match(/Missing token/)
-      end
-    end
-
-    context 'when the operation does not exist' do
-      let(:id) { 0 }
-
-      it 'returns status code 422' do
-        expect(response).to have_http_status(422)
-      end
-
-      it 'returns the a failure message' do
-        expect(json['message']).to match(/Missing token/)
-      end
-    end
-  end
-
-  # Test suite for DELETE /balances/:id
-  describe 'DELETE /balances/:id' do
-    before { delete "/users/#{user.id}/operations/#{id}", params: {}, headers: headers }
-
-    it 'returns status code 422' do
-      expect(response).to have_http_status(422)
-    end
-
-    it 'returns the a failure message' do
-      expect(json['message']).to match(/Missing token/)
+      expect(response).to have_http_status(:not_found)
     end
   end
 end
-
-RSpec.describe 'Operations API requested by ADMIN' do
-  let!(:user) { UserFactory.create(password: 'password', password_confirmation: 'password', admin: true) }
-  let!(:balance) { BalanceFactory.create(user_id: user.id) }
-  let!(:operation) { OperationFactory.create(user: user, balance_id: balance.id) }
-  let(:balance_id) { balance.id }
-  let(:id) { operation.id }
-  let(:headers) { valid_headers }
-
-  # Test suite for GET /users/:user_id/operations
-  describe 'GET /users/:user_id/operations' do
-    before { get "/users/#{user.id}/operations", params: {}, headers: headers }
-
-    context 'when user exists' do
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
-
-      it 'returns all user operations' do
-        expect(json.size).to eq(1)
-      end
-    end
-  end
-
-  # Test suite for GET /users/:user_id/operations/:id
-  describe 'GET /users/:user_id/operations/:id' do
-    before { get "/users/#{user.id}/operations/#{id}", params: {}, headers: headers }
-
-    context 'when user operation exists' do
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
-
-      it 'returns the operation' do
-        expect(json['id']).to eq(id)
-      end
-    end
-
-    context 'when user operation does not exist' do
-      let(:id) { 0 }
-
-      it 'returns status code 404' do
-        expect(response).to have_http_status(404)
-      end
-
-      it 'returns a not found message' do
-        expect(response.body).to match(/Couldn't find Operation/)
-      end
-    end
-  end
-
-  # Test suite for POST /users/:user_id/operations
-  describe 'POST /users/:user_id/operations' do
-    let(:valid_attributes) { { title: 'Visit Narnia', status: 2, balance_id: 2 }.to_json }
-
-    context 'when request attributes are valid' do
-      before do
-        post "/users/#{user.id}/operations", params: valid_attributes, headers: headers
-      end
-
-      it 'returns status code 201' do
-        expect(response).to have_http_status(201)
-      end
-
-      it 'returns the object created' do
-        expect(json).to be_a(Hash)
-      end
-    end
-
-    context 'when an invalid request' do
-      before { post "/users/#{user.id}/operations", params: {}, headers: headers }
-
-      it 'returns status code 422' do
-        expect(response).to have_http_status(422)
-      end
-
-      it 'returns a failure message' do
-        expect(response.body).to match(/Validation failed: Balance can't be blank, Title can't be blank, Title is invalid, Status can't be blank, Status is invalid/)
-      end
-    end
-  end
-
-  # Test suite for PUT /users/:user_id/operations/:id
-  describe 'PUT /users/:user_id/operations/:id' do
-    let(:valid_attributes) { { title: 'Mozart' }.to_json }
-
-    before do
-      put "/users/#{user.id}/operations/#{id}", params: valid_attributes, headers: headers
-    end
-
-    context 'when operation exists' do
-      it 'returns status code 204' do
-        expect(response).to have_http_status(204)
-      end
-
-      it 'updates the operation' do
-        updated_item = Operation.find(id)
-        expect(updated_item.title).to match(/Mozart/)
-      end
-    end
-
-    context 'when the operation does not exist' do
-      let(:id) { 0 }
-
-      it 'returns status code 404' do
-        expect(response).to have_http_status(404)
-      end
-
-      it 'returns a not found message' do
-        expect(response.body).to match(/Couldn't find Operation/)
-      end
-    end
-  end
-
-  # Test suite for DELETE /balances/:id
-  describe 'DELETE /balances/:id' do
-    before { delete "/users/#{user.id}/operations/#{id}", params: {}, headers: headers }
-
-    it 'returns status code 204' do
-      expect(response).to have_http_status(204)
-    end
-  end
-end
-# rubocop:enable Layout/LineLength

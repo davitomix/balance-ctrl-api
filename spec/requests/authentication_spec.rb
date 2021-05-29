@@ -1,35 +1,42 @@
 require 'rails_helper'
 
-RSpec.describe 'Authentication', type: :request do
+RSpec.describe 'AuthenticationController', type: :request do
+  let(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
+  let(:headers) { valid_headers.except('Authorization') }
+
   describe 'POST /auth/login' do
-    let!(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
-    let(:headers) { valid_headers.except('Authorization') }
-    let(:valid_credentials) do
-      {
-        email: user.email,
-        password: user.password
-      }.to_json
-    end
-    let(:invalid_credentials) do
-      {
-        email: Faker::Internet.email,
-        password: Faker::Internet.password
-      }.to_json
-    end
-
     context 'When request is valid' do
-      before { post '/auth/login', params: valid_credentials, headers: headers }
-
       it 'returns an authentication token' do
-        expect(json['auth_token']).not_to be_nil
+        post '/auth/login',
+             headers: headers,
+             params: {
+               email: user.email,
+               password: user.password
+             }.to_json
+
+        data = JSON.parse(response.body)
+
+        expect(response).to have_http_status(200)
+        expect(data['auth_token']).not_to be_nil
+        expect(data['user_id']).to eq(9)
       end
     end
 
     context 'When request is invalid' do
-      before { post '/auth/login', params: invalid_credentials, headers: headers }
-
       it 'returns a failure message' do
-        expect(json['message']).to match(/Invalid credentials/)
+        post '/auth/login',
+             headers: headers,
+             params: {
+               email: Faker::Internet.email,
+               password: Faker::Internet.password
+             }.to_json
+
+        data = JSON.parse(response.body)
+
+        expect(response).to have_http_status(401)
+        expect(data['message']).to match(/Invalid credentials/)
+        expect(data['auth_token']).to be_nil
+        expect(data['user_id']).to be_nil
       end
     end
   end

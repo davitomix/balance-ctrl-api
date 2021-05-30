@@ -1,48 +1,36 @@
 class OperationsController < ApplicationController
-  skip_before_action :authorize_request, only: %i[index show]
-  skip_before_action :authorize_admin_request
-  before_action :set_user
-  before_action :set_operation, only: %i[show update destroy]
+  skip_before_action :authorize_admin
 
-  # GET /balances/:balance_id/operations
   def index
-    json_response(@user.operations)
+    render json: { operations: current_user.operations }, status: :ok
   end
 
-  # GET /balances/:balance_id/operations/:id
   def show
-    json_response(@operation)
+    render json: OperationSerializer.new.serialize(find_operation), status: :ok
   end
 
-  # POST /balances/:balance_id/operations
   def create
-    @operation = @user.operations.create!(operation_params)
-    json_response(@operation, :created)
+    operation = current_user.operations.create!(operation_params)
+    render json: operation, status: :created
   end
 
-  # PUT /balances/:balance_id/operations/:id
   def update
-    @operation.update(operation_params)
+    find_operation.update!(operation_params)
     head :no_content
   end
 
-  # DELETE /balances/:balance_id/operations/:id
   def destroy
-    @operation.destroy
+    find_operation.destroy
     head :no_content
   end
 
   private
 
+  def find_operation
+    Operation.find(params[:id])
+  end
+
   def operation_params
-    params.permit(:title, :status, :balance_id)
-  end
-
-  def set_user
-    @user = User.find(params[:user_id])
-  end
-
-  def set_operation
-    @operation = @user.operations.find(params[:id]) if @user
+    params.require(:operation).permit(:title, :status, :balance_id)
   end
 end

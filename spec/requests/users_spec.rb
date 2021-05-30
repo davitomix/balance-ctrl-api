@@ -23,7 +23,7 @@ RSpec.describe 'UsersController', type: :request do
         expect(response).to have_http_status(201)
         expect(data['message']).to match(/Account created successfully/)
         expect(data['auth_token']).not_to be_nil
-        expect(data['user_id']).to eq(34)
+        expect(data['user_id']).to be_a(Numeric)
       end
     end
 

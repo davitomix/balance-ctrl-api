@@ -18,7 +18,7 @@ RSpec.describe 'AuthenticationController', type: :request do
 
         expect(response).to have_http_status(200)
         expect(data['auth_token']).not_to be_nil
-        expect(data['user_id']).to eq(9)
+        expect(data['user_id']).to be_a(Numeric)
       end
     end
 

@@ -4,10 +4,10 @@ RSpec.describe 'AuthenticationController', type: :request do
   let(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
   let(:headers) { valid_headers.except('Authorization') }
 
-  describe 'POST /auth/login' do
+  describe 'POST /login' do
     context 'When request is valid' do
       it 'returns an authentication token' do
-        post '/auth/login',
+        post '/login',
              headers: headers,
              params: {
                email: user.email,
@@ -24,7 +24,7 @@ RSpec.describe 'AuthenticationController', type: :request do
 
     context 'When request is invalid' do
       it 'returns a failure message' do
-        post '/auth/login',
+        post '/login',
              headers: headers,
              params: {
                email: Faker::Internet.email,

@@ -4,7 +4,7 @@ RSpec.describe ApplicationController, type: :controller do
   # create test user
   let!(:user) { UserFactory.create(password: 'password', password_confirmation: 'password') }
   # set headers for authorization
-  let(:headers) { { 'Authorization' => token_generator(user.id, user.admin) } }
+  let(:headers) { { 'Authorization' => token_generator(user.id) } }
   let(:invalid_headers) { { 'Authorization' => nil } }
 
   describe '#authorize_request' do

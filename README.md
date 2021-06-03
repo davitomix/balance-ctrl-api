@@ -261,7 +261,7 @@ The parameter "-n X" indicates the number of iterations.
 
 ## Author
 
-👤 **David García**
+👤 **David Martínez**
 
 - Github: [@davomartinez-dev](https://github.com/davomartinez-dev)
 - LinkedIn: [David Martinez.](https://www.linkedin.com/in/davidelimartinez/)

@@ -1,4 +1,6 @@
 class BalancesController < ApplicationController
+  before_action :logged_in_user
+
   def index
     render json: { balances: current_user.balances }, status: :ok
   end

@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   resources :balances
 
   post 'signup', to: 'users#create'
-  post '/login', to: 'authentication#authenticate'
+  post '/login', to: 'sessions#create'
 end

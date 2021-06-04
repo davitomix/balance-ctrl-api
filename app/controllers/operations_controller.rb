@@ -1,6 +1,4 @@
 class OperationsController < ApplicationController
-  skip_before_action :authorize_admin
-
   def index
     render json: { operations: current_user.operations }, status: :ok
   end

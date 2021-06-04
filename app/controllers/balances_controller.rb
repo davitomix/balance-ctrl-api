@@ -1,6 +1,4 @@
 class BalancesController < ApplicationController
-  skip_before_action :authorize_admin, only: %i[index show]
-
   def index
     render json: { balances: current_user.balances }, status: :ok
   end

@@ -17,7 +17,7 @@ RSpec.describe BalancesController, type: :controller do
 
         expect(response).to have_http_status(:ok)
         expect(data['balances'].map { |o| o['id'] })
-        .to match_array([balance_1.id, balance_2.id])
+          .to match_array([balance_1.id, balance_2.id])
       end
     end
 

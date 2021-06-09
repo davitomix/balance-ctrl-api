@@ -1,23 +1,23 @@
 require 'rails_helper'
 
-RSpec.describe BalancesController, type: :controller do
-  describe 'GET /balances' do
+RSpec.describe OperationsController, type: :controller do
+  describe 'GET /operations' do
     context 'when signed in user' do
       let(:user) { UserFactory.create }
 
       before { log_in_as(user) }
 
       it 'returns a success response' do
-        balance_1 = BalanceFactory.create(user_id: user.id)
-        balance_2 = BalanceFactory.create(user_id: user.id)
+        operation_1 = OperationFactory.create(user: user)
+        operation_2 = OperationFactory.create(user: user)
 
         get :index
 
         data = JSON.parse(response.body)
 
         expect(response).to have_http_status(:ok)
-        expect(data['balances'].map { |o| o['id'] })
-          .to match_array([balance_1.id, balance_2.id])
+        expect(data['operations'].map { |o| o['id'] })
+          .to match_array([operation_1.id, operation_2.id])
       end
     end
 
@@ -30,39 +30,39 @@ RSpec.describe BalancesController, type: :controller do
     end
   end
 
-  describe 'GET /balance/:id' do
+  describe 'GET /operation/:id' do
     let!(:user) { UserFactory.create }
 
     context 'when signed in user' do
       before { log_in_as(user) }
 
       it 'returns a success response' do
-        balance = BalanceFactory.create(user_id: user.id)
+        operation = OperationFactory.create(user: user)
 
         get :show, params: {
-          id: balance.id
+          id: operation.id
         }
 
         data = JSON.parse(response.body)
 
         expect(response).to have_http_status(:ok)
-        expect(data['balance']).to eq(JSON.parse(balance.to_json))
+        expect(data).to eq(OperationSerializer.new.serialize(operation).as_json)
       end
     end
 
     context 'when not signed in' do
       it 'returns 401 code' do
-        balance = BalanceFactory.create(user_id: user.id)
+        operation = OperationFactory.create(user: user)
 
         get :show, params: {
-          id: balance.id
+          id: operation.id
         }
 
         expect(response).to have_http_status(:unauthorized)
       end
     end
 
-    context 'when balance not exists' do
+    context 'when operation not exists' do
       before { log_in_as(user) }
 
       it 'returns 404' do
@@ -75,35 +75,37 @@ RSpec.describe BalancesController, type: :controller do
     end
   end
 
-  describe 'POST /balances' do
+  describe 'POST /operations' do
     let!(:user) { UserFactory.create }
 
     context 'when signed in user' do
       before { log_in_as(user) }
 
       it 'returns a success response' do
+        balance = BalanceFactory.create(user_id: user.id)
+
         post :create, params: {
-          balance: {
+          operation: {
             title: 'Industrial Shipment',
-            total: 12_350,
-            category: 'Technological Surgery',
-            user_id: user.id
+            status: 1,
+            balance_id: balance.id
           }
         }
 
         expect(response).to have_http_status(:created)
-        expect(response.body).to include(user.id.to_json)
+        expect(response.body).to include(balance.id.to_json)
       end
     end
 
     context 'when not signed in' do
       it 'returns 401 code' do
+        balance = BalanceFactory.create(user_id: user.id)
+
         post :create, params: {
-          balance: {
+          operation: {
             title: 'Industrial Shipment',
-            total: 12_350,
-            category: 'Technological Surgery',
-            user_id: user.id
+            status: 1,
+            balance_id: balance.id
           }
         }
 
@@ -112,22 +114,20 @@ RSpec.describe BalancesController, type: :controller do
     end
   end
 
-  describe 'PUT /balance/:id' do
+  describe 'PUT /operation/:id' do
     let!(:user) { UserFactory.create }
 
     context 'when signed in user' do
       before { log_in_as(user) }
 
       it 'returns a success response' do
-        balance = BalanceFactory.create
+        operation = OperationFactory.create(user: user)
 
         put :update, params: {
-          id: balance.id,
-          balance: {
+          id: operation.id,
+          operation: {
             title: 'Industrial Shipment',
-            total: 12_350,
-            category: 'Technological Surgery',
-            user_id: user.id
+            status: 2
           }
         }
 
@@ -135,17 +135,15 @@ RSpec.describe BalancesController, type: :controller do
       end
     end
 
-    context 'when balance not exists' do
+    context 'when operation not exists' do
       before { log_in_as(user) }
 
       it 'returns 404' do
         put :update, params: {
           id: 100,
-          balance: {
+          operation: {
             title: 'Industrial Shipment',
-            total: 12_350,
-            category: 'Technological Surgery',
-            user_id: user.id
+            status: 2
           }
         }
 
@@ -155,14 +153,13 @@ RSpec.describe BalancesController, type: :controller do
 
     context 'when not signed in' do
       it 'returns 401 code' do
-        balance = BalanceFactory.create
+        operation = OperationFactory.create(user: user)
 
         put :update, params: {
-          id: balance.id,
-          balance: {
+          id: operation.id,
+          operation: {
             title: 'Industrial Shipment',
-            total: 12_350,
-            category: 'Technological Surgery'
+            status: 2
           }
         }
 
@@ -171,24 +168,24 @@ RSpec.describe BalancesController, type: :controller do
     end
   end
 
-  describe 'DELETE /balance/:id' do
+  describe 'DELETE /operation/:id' do
     let!(:user) { UserFactory.create }
 
     context 'when signed in user' do
       before { log_in_as(user) }
 
       it 'returns a success response' do
-        balance = BalanceFactory.create
+        operation = OperationFactory.create(user: user)
 
         delete :destroy, params: {
-          id: balance.id
+          id: operation.id
         }
 
         expect(response).to have_http_status(:no_content)
       end
     end
 
-    context 'when balance not exists' do
+    context 'when operation not exists' do
       before { log_in_as(user) }
 
       it 'returns 404' do
@@ -202,10 +199,10 @@ RSpec.describe BalancesController, type: :controller do
 
     context 'when not signed in' do
       it 'returns 401 code' do
-        balance = BalanceFactory.create
+        operation = OperationFactory.create(user: user)
 
         delete :destroy, params: {
-          id: balance.id
+          id: operation.id
         }
 
         expect(response).to have_http_status(:unauthorized)

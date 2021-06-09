@@ -1,4 +1,6 @@
 class OperationsController < ApplicationController
+  before_action :logged_in_user
+
   def index
     render json: { operations: current_user.operations }, status: :ok
   end

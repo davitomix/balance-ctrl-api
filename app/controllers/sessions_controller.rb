@@ -6,12 +6,14 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       render json: {
         logged_in: true,
-        user: user.serializable_hash(except: %i[
-                                       password_digest
-                                       admin
-                                       created_at
-                                       updated_at
-                                     ])
+        user: user.serializable_hash(
+          except: %i[
+            password_digest
+            admin
+            created_at
+            updated_at
+          ]
+        )
       }, status: :ok
     else
       head :unauthorized

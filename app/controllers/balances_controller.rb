@@ -7,7 +7,7 @@ class BalancesController < ApplicationController
 
   def create
     balance = current_user.balances.create!(balance_params)
-    render json: balance, status: :created
+    render json: { balance: balance }, status: :created
   end
 
   def show

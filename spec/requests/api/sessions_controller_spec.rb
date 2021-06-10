@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe SessionsController, type: :controller do
   describe 'POST /login' do
     subject(:call) { post :create, params: params }
-    
+
     let!(:user) { UserFactory.create }
 
     context 'with valid credentials' do

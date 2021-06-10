@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :params_not_nil
+
   def create
     user = User.find_by(email: params[:user][:email]).try(:authenticate, params[:user][:password])
 
@@ -18,5 +20,11 @@ class SessionsController < ApplicationController
     else
       head :unauthorized
     end
+  end
+
+  private
+
+  def params_not_nil
+    head :unauthorized if params[:user].blank?
   end
 end

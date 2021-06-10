@@ -1,28 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
-  describe 'POST #create' do
-    context 'with valid params' do
-      let!(:user) { UserFactory.create }
+  describe 'POST /login' do
+    subject(:call) { post :create, params: params }
+    
+    let!(:user) { UserFactory.create }
 
-      it 'returns a success response' do
-        post :create, params: {
-          user: {
-            email: user.email,
-            password: 'password'
-          }
-        }
+    context 'with valid credentials' do
+      let(:params) { { user: { email: user.email, password: 'password' } } }
 
-        expect(response).to have_http_status(:ok)
-      end
-
-      it 'returns a success response' do
-        post :create, params: {
-          user: {
-            email: user.email,
-            password: 'password'
-          }
-        }
+      it 'returns 200' do
+        call
 
         expect(response).to have_http_status(:ok)
         expect(response.body).to eq(
@@ -38,14 +26,21 @@ RSpec.describe SessionsController, type: :controller do
       end
     end
 
-    context 'with invalid params' do
-      it 'has status unauthorized' do
-        post :create, params: {
-          user: {
-            email: 'wrong@email.com',
-            password: 'wrongpassword'
-          }
-        }
+    context 'with invalid credentials' do
+      let(:params) { { user: { email: 'wrong@email.com', password: 'wrongpassword' } } }
+
+      it 'returns 401' do
+        call
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'with empty params' do
+      let(:params) { {} }
+
+      it 'returns 401' do
+        call
 
         expect(response).to have_http_status(:unauthorized)
       end
